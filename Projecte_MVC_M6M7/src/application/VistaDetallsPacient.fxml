@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="516.0" prefWidth="720.0" style="-fx-background-image: resources\Imagen_Background.jpg;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DetallsPacientController">
+   <top>
+      <MenuBar prefHeight="29.0" prefWidth="720.0" BorderPane.alignment="CENTER">
+        <menus>
+            <Menu mnemonicParsing="false" text="Unspecified Menu">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Doctors">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Pacients">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Perfil">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Sobre">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label prefHeight="54.0" prefWidth="720.0" text="Fulla Pacient" />
+                  <TabPane prefHeight="434.0" prefWidth="720.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Untitled Tab 1">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ListView prefHeight="406.0" prefWidth="720.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Untitled Tab 2">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView layoutX="66.0" layoutY="103.0" prefHeight="200.0" prefWidth="526.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="Dia" />
+                                        <TableColumn prefWidth="184.0" text="Consulta" />
+                                          <TableColumn prefWidth="100.0" text="Comentari" />
+                                          <TableColumn prefWidth="166.0" text="Assistent" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

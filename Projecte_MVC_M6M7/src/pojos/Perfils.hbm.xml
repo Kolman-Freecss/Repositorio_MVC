@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-feb-2018 17:24:00 by Hibernate Tools 4.0.1.Final -->
+<hibernate-mapping>
+    <class name="pojos.Perfils" table="perfils" catalog="bdclinica">
+        <id name="codi" type="int">
+            <column name="codi" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcio" type="string">
+            <column name="descripcio" length="15" not-null="true" />
+        </property>
+        <set name="usuarises" table="usuaris" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="perfil" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Usuaris" />
+        </set>
+    </class>
+</hibernate-mapping>

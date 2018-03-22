@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22-feb-2018 17:24:00 by Hibernate Tools 4.0.1.Final -->
+<hibernate-mapping>
+    <class name="pojos.Usuaris" table="usuaris" catalog="bdclinica">
+        <id name="idUsuari" type="string">
+            <column name="idUsuari" length="15" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="perfils" class="pojos.Perfils" fetch="select">
+            <column name="perfil" not-null="true" />
+        </many-to-one>
+        <property name="password" type="string">
+            <column name="password" length="15" not-null="true" />
+        </property>
+        <property name="nom" type="string">
+            <column name="nom" length="25" not-null="true" />
+        </property>
+        <property name="cognoms" type="string">
+            <column name="cognoms" length="50" not-null="true" />
+        </property>
+        <property name="correu" type="string">
+            <column name="correu" length="50" not-null="true" />
+        </property>
+        <property name="numcolegiat" type="java.lang.Integer">
+            <column name="numcolegiat" />
+        </property>
+        <property name="especialitat" type="string">
+            <column name="especialitat" length="50" />
+        </property>
+        <set name="assistencieses" table="assistencies" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="assistent" length="15" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Assistencies" />
+        </set>
+    </class>
+</hibernate-mapping>
