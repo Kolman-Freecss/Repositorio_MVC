@@ -1,22 +1,50 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Iterator;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Menu;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
-public class MenuController {
+public class MenuController implements Initializable {
 
 	@FXML private BorderPane paneArrel;
 	@FXML private AnchorPane paneVista;
 
+	@FXML private Menu menuServeis;
+
+	/**
+	 * Per portar quin tipus de perfil te l'usuari logat
+	 */
+	private LoginController loginController;
 
 
+	@Override
+	public void initialize(URL url, ResourceBundle rsrcs) {
+
+		FXMLLoader carregador = new FXMLLoader(getClass().getResource("VistaLogin.fxml"));
+		try {
+			BorderPane root = carregador.load();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		loginController = carregador.getController();
+
+		if(LoginController.getTipusPerfil().equals("ADMINISTRADOR")){
+			menuServeis.setVisible(false);;
+		}
+
+	}
 
 	public void carregarVista(Pane vista) {
 		if (vista == null) return;

@@ -22,11 +22,13 @@ import resources.ControlErrores;
 
 public class LoginController implements Initializable{
 
-	@FXML private TextField et1;
-	@FXML private TextField et2;
+	@FXML private TextField et1; //usuari
+	@FXML private TextField et2; //password
 
 	@FXML private Button btEntrar;
 	@FXML private Button btRegistrar;
+
+	private static String tipusPerfil;
 
 	/**
 	 * Initializes the controller class.
@@ -109,6 +111,11 @@ public class LoginController implements Initializable{
 		}
 	}
 
+
+	/**
+	 * Checkea si el usuari existeix y quin tipus de perfil es
+	 * @return Si existeix = true / Si no existeix = false
+	 */
 	private boolean checkLogin(){
 
 		UsuarisDao usuariJDBC = DaoManager.getUsuarisDao();
@@ -117,6 +124,10 @@ public class LoginController implements Initializable{
 		try {
 
 			usuari = usuariJDBC.getUsuari(et1.getText());
+
+			while(tipusPerfil == null){
+				tipusPerfil = usuari.getPerfils().getDescripcio();
+			}
 
 
 		} catch (SQLException e) {
@@ -133,6 +144,12 @@ public class LoginController implements Initializable{
 			}
 		}
 	}
+
+	public static String getTipusPerfil() {
+		return tipusPerfil;
+	}
+
+
 
 
 	/*public void carregarVista(Pane vista) {

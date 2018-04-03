@@ -3,8 +3,6 @@ package dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.hibernate.HibernateException;
-
 import pojos.Perfils;
 import pojos.Usuaris;
 

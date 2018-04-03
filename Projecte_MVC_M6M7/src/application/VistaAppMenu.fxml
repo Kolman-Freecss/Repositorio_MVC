@@ -31,7 +31,7 @@
                   <MenuItem mnemonicParsing="false" text="Tancar sessió" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Serveis">
+            <Menu fx:id="menuServeis" mnemonicParsing="false" text="Serveis">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#obrirServeis" text="Llista Serveis" />
               </items>
