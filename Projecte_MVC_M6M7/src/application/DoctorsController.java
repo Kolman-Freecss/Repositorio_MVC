@@ -24,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import pojos.Assistencies;
+import pojos.Clients;
 import pojos.Usuaris;
 
 public class DoctorsController implements Initializable{
@@ -38,14 +39,20 @@ public class DoctorsController implements Initializable{
 	//llista amb els usuaris OK ESTO NOS SERVIRA PARA EL REMOVE, YA QUE AQUI NO SIRVE PORQUE EL NOMBRE DEL USUARIO(MEDICO) ES PRIMARY KEY
 	//private List<Usuaris> listUsuarisAuxiliar;
 	private ObservableList<String> items;
+	private ObservableList<String> itemsPacients;
 
-	//private List<Usuaris> llistaDoctors = new LinkedList<Usuaris>(Arrays.asList(usuariDao.getUsuaris()));
+	private static List<Usuaris> llistaDoctors = new LinkedList<Usuaris>();
 
 
 
 	@Override
 	public void initialize(URL url, ResourceBundle rsrcs) {
 
+		try {
+			llistaDoctors.addAll(usuariDao.getUsuaris());
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 
 		if(this.colDoctors != null){
 
@@ -68,33 +75,42 @@ public class DoctorsController implements Initializable{
 			try {
 				//Cojes totes les assistencies..
 				List<Assistencies> llistatAssistencies = this.assistenciesDao.getAssistencies();
-				//P
-				List<String> llistaPacients = new LinkedList<String>();
 
 
+				colDoctors.getSelectionModel().select(0);
+
+				chargePacientXDoctor(llistatAssistencies);
 				//Agafem el index del doctor del listview que sera igual al index on es troba el usuari en la llista auxiliar que hem fet
-				final int selectedIdx = colPacients.getSelectionModel().getSelectedIndex();
+				/*final int selectedIdx = colDoctors.getSelectionModel().getSelectedIndex();
+
+				Usuaris doctor = this.llistaDoctors.get(selectedIdx);
+				for (Assistencies a : llistatAssistencies) {
+					if(a.getUsuaris().getIdUsuari().equals(doctor.getIdUsuari())){
+						//el llistat d'assistencies solo tiene el id por algun motivo
+						//por eso tengo que obtener el cliente apartir del id
+						Clients client = clientDao.getClient(a.getClients().getIdClient());
+						llistaPacients.add(client.getNom());
+
+					}
+
+				}*/
 
 
 		        //if (selectedIdx != -1) {
 
-				colPacients.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+				/**
+				 * Al escollir un altre doctor carga automaticament el ListView dels pacients als que ha fet una assistencia
+				 */
+				colDoctors.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 				    @Override
 				    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				        // Your action here
-				        System.out.println("Selected item: " + newValue);
 
-				      //Iterem en el llistat d'assistencies per trobar els pacients que estan relacionats amb el assistent que l'ha fet la consulta
-				          for(Assistencies a : llistatAssistencies){
-				        	  if(a.getUsuaris().getIdUsuari().equals(newValue)){
-				        		  llistaPacients.add(a.getClients().getNom());
-				        	  }
-				          }
-
-
-						items = FXCollections.observableArrayList(llistaPacients);
-						colPacients.setItems(items);
+				    	chargePacientXDoctor(llistatAssistencies);
 				    }
+
+
 				});
 
 		          String itemToRemove = colPacients.getSelectionModel().getSelectedItem();
@@ -119,6 +135,31 @@ public class DoctorsController implements Initializable{
 
 		}
 
+	}
+
+	private void chargePacientXDoctor(List<Assistencies> llistatAssistencies) {
+		final int selectedIdx = colDoctors.getSelectionModel().getSelectedIndex();
+    	List<String> llistaPacients = new LinkedList<String>();
+    	//List<Usuaris> llistaDoctors = new LinkedList<Usuaris>();
+		Usuaris doctor = llistaDoctors.get(selectedIdx);
+		for (Assistencies a : llistatAssistencies) {
+			if(a.getUsuaris().getIdUsuari().equals(doctor.getIdUsuari())){
+				//el llistat d'assistencies solo tiene el id por algun motivo
+				//por eso tengo que obtener el cliente apartir del id
+				Clients client;
+				try {
+					client = clientDao.getClient(a.getClients().getIdClient());
+					llistaPacients.add(client.getNom());
+
+					itemsPacients = FXCollections.observableArrayList(llistaPacients);
+					colPacients.setItems(itemsPacients);
+				} catch (HibernateException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 

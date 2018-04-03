@@ -35,7 +35,6 @@ public class LoginController implements Initializable{
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -148,56 +147,4 @@ public class LoginController implements Initializable{
 	public static String getTipusPerfil() {
 		return tipusPerfil;
 	}
-
-
-
-
-	/*public void carregarVista(Pane vista) {
-		if (vista == null) return;
-
-		if (checkSiVistaEstaCarregada(vista.getId())) return;
-
-		this.paneVista.getChildren().clear();
-
-		//paneArrel.setPrefHeight(paneArrel.getHeight() - 80.0);
-
-		this.paneVista.getChildren().add(vista);
-
-		AnchorPane.setTopAnchor(vista,0.0);
-		AnchorPane.setBottomAnchor(vista,0.0);
-		AnchorPane.setLeftAnchor(vista, 0.0);
-		AnchorPane.setRightAnchor(vista, 0.0);
-		//this.paneVista.setVisible(true);
-	}
-
-	private boolean checkSiVistaEstaCarregada(String id) {
-		if (id == null || this.paneVista != null || this.paneVista.getChildren() != null) return false;
-
-		Iterator<Node> fills = this.paneVista.getChildren().iterator();
-
-		while (fills.hasNext()) {
-			Node aux = fills.next();
-			if (id.equals(aux.getId())) return true;
-		}
-
-		return false;
-	}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

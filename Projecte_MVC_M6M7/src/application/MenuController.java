@@ -30,7 +30,7 @@ public class MenuController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rsrcs) {
 
-		FXMLLoader carregador = new FXMLLoader(getClass().getResource("VistaLogin.fxml"));
+		/*FXMLLoader carregador = new FXMLLoader(getClass().getResource("VistaLogin.fxml"));
 		try {
 			BorderPane root = carregador.load();
 		} catch (IOException e) {
@@ -38,9 +38,12 @@ public class MenuController implements Initializable {
 			e.printStackTrace();
 		}
 
-		loginController = carregador.getController();
+		loginController = carregador.getController();*/
 
-		if(LoginController.getTipusPerfil().equals("ADMINISTRADOR")){
+		/**
+		 * Si l'usuari no es un Administrador no tindrá accés
+		 */
+		if(!LoginController.getTipusPerfil().equals("ADMINISTRADOR")){
 			menuServeis.setVisible(false);;
 		}
 
@@ -149,6 +152,22 @@ public class MenuController implements Initializable {
 	public void obrirServeis() {
 		try {
 			BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaServeis.fxml"));
+
+			//txtF1 = (TextField) this.vistaInici.lookup("#txtF1"); opcion valida antes de cargar la vista
+
+
+			this.carregarVista(vista);
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	public void tancarSessio() {
+		try {
+			BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaLogin.fxml"));
 
 			//txtF1 = (TextField) this.vistaInici.lookup("#txtF1"); opcion valida antes de cargar la vista
 

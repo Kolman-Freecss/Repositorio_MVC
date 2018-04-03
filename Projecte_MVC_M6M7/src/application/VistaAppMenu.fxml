@@ -28,7 +28,7 @@
           <Menu mnemonicParsing="false" text="Perfil">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#obrirPerfilUsuari" text="Configuració" />
-                  <MenuItem mnemonicParsing="false" text="Tancar sessió" />
+                  <MenuItem mnemonicParsing="false" onAction="#tancarSessio" text="Tancar sessió" />
             </items>
           </Menu>
             <Menu fx:id="menuServeis" mnemonicParsing="false" text="Serveis">

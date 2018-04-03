@@ -15,7 +15,6 @@ import dao.ServeisDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -51,6 +50,15 @@ public class ServeisController implements Initializable{
 
 	@Override
 	public void initialize(URL url, ResourceBundle rsrcs) {
+
+		/**
+		 * Si l'usuari no es un administrador no tindrá accés a l'inserció, modificació o eliminació d'un servei
+		 */
+		if(!LoginController.getTipusPerfil().equals("ADMINISTRADOR")){
+			btAfegir.setVisible(false);
+			btModificar.setVisible(false);
+			btEliminar.setVisible(false);
+		}
 
 		if(this.colServeis != null){
 
@@ -204,12 +212,16 @@ public class ServeisController implements Initializable{
 	private void showAfegirServei(String funcionalitat) throws IOException, HibernateException, NumberFormatException, SQLException{
 		Stage window = new Stage();
 		FXMLLoader carregador = new FXMLLoader(getClass().getResource("VistaSubfinestraAfegirServei.fxml"));
+
+		SubfinestraAfegirServeiController.setFuncionalitat(funcionalitat);
+
+		//Al hacer el load() hace el initialice
 		BorderPane root = carregador.load();
 
 		//recoje el controlador que esta asociado a la variable "carregador" en este caso es el controlador de la vista "VistaSubfinestraAfegirServei.fxml"
 		controladorAfegir = carregador.getController();
 
-		controladorAfegir.setFuncionalitat(funcionalitat);
+
 
 		//ServeisDao serveisDao = DaoManager.getServeisDao();
 

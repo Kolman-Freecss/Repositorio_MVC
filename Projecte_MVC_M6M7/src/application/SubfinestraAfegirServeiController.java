@@ -15,10 +15,10 @@ public class SubfinestraAfegirServeiController implements Initializable{
 
 	@FXML private Button etAfegir;
 	@FXML private Button etVolver;
-	@FXML private TextField et1;
-	@FXML private TextField et2;
+	@FXML private static TextField et1;
+	@FXML private static TextField et2;
 
-	private String funcionalitat;
+	private static String funcionalitat;
 
 	private String code;
 	private String nomServei;
@@ -28,7 +28,9 @@ public class SubfinestraAfegirServeiController implements Initializable{
 	@Override
 	public void initialize(URL url, ResourceBundle rsrcs) {
 
-
+		if("modificar".equals(funcionalitat)){
+			et1.disabledProperty();
+		}
 
 	}
 
@@ -37,6 +39,7 @@ public class SubfinestraAfegirServeiController implements Initializable{
 	public void clickAfegir(ActionEvent event){
 
 		code = et1.getText();
+
 		nomServei = et2.getText();
 
 		Node source = (Node) event.getSource();
@@ -64,8 +67,8 @@ public class SubfinestraAfegirServeiController implements Initializable{
 	}
 
 
-	public void setFuncionalitat(String funcionalitat) {
-		this.funcionalitat = funcionalitat;
+	public static void setFuncionalitat(String funcionalitatP) {
+		funcionalitat = funcionalitatP;
 
 		if("modificar".equals(funcionalitat)){
 			et1.setText(String.valueOf(ServeisController.getServeiAModificar().getCodi()));
