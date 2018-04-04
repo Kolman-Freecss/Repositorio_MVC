@@ -124,9 +124,7 @@ public class LoginController implements Initializable{
 
 			usuari = usuariJDBC.getUsuari(et1.getText());
 
-			while(tipusPerfil == null){
-				tipusPerfil = usuari.getPerfils().getDescripcio();
-			}
+			tipusPerfil = usuari.getPerfils().getDescripcio();
 
 
 		} catch (SQLException e) {

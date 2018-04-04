@@ -2,16 +2,12 @@ package application;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import org.hibernate.HibernateException;
 
-import antlr.collections.impl.LList;
 import dao.AssistenciesDao;
 import dao.ClientsDao;
 import dao.DaoManager;
@@ -140,7 +136,6 @@ public class DoctorsController implements Initializable{
 	private void chargePacientXDoctor(List<Assistencies> llistatAssistencies) {
 		final int selectedIdx = colDoctors.getSelectionModel().getSelectedIndex();
     	List<String> llistaPacients = new LinkedList<String>();
-    	//List<Usuaris> llistaDoctors = new LinkedList<Usuaris>();
 		Usuaris doctor = llistaDoctors.get(selectedIdx);
 		for (Assistencies a : llistatAssistencies) {
 			if(a.getUsuaris().getIdUsuari().equals(doctor.getIdUsuari())){
