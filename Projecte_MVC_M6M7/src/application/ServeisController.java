@@ -28,25 +28,27 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pojos.Serveis;
+import resources.ControlErrores;
 
 public class ServeisController implements Initializable{
 
 	@FXML private ListView<String> colServeis;
 	private List<String> listNomServeis = new LinkedList<String>();
-	ServeisDao serveisDao = DaoManager.getServeisDao();
+	private ServeisDao serveisDao = DaoManager.getServeisDao();
 
 	@FXML private Button btAfegir;
 	@FXML private Button btModificar;
 	@FXML private Button btEliminar;
-	SubfinestraAfegirServeiController controladorAfegir;
+	private SubfinestraAfegirServeiController controladorAfegir;
 
-	//Llista de que te els noms del serveis
+	/**
+	 * Llista amb els noms dels Serveis
+	 */
 	private ObservableList<String> items;
 	/**
 	 * Llista per recollir els objectes per eliminar, afegir...
 	 */
-	private List<Serveis> listServeis; //Guardamos toda la lista de objetos de la cual podemos recojer para eliminar, añadir...
-
+	private List<Serveis> listServeis;
 
 	private static Serveis serveiAModificar;
 
@@ -64,23 +66,17 @@ public class ServeisController implements Initializable{
 		}
 
 		if(this.colServeis != null){
-
-
 			try {
 
-				//Es per fer-ho de mes formes pero el mes optim es portar les dades necesaries del Back directament
 				listServeis = serveisDao.getServeis();
 				for(Serveis s : listServeis){
 					listNomServeis.add(s.getDescripcio());
 				}
-
 				items = FXCollections.observableArrayList(listNomServeis);
 
 				colServeis.setItems(items);
 			} catch (HibernateException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
+				ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 			}
 
 		}
@@ -92,50 +88,33 @@ public class ServeisController implements Initializable{
 
 		try {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Confirmation Dialog");
-			alert.setHeaderText("Look, a Confirmation Dialog");
-			alert.setContentText("Are you ok with this?");
+			alert.setTitle("Confirmació");
+			alert.setContentText("Estas seguro de esto?");
 
 			Optional<ButtonType> result = alert.showAndWait();
 
 			if (result.get() == ButtonType.OK){
 
-
-
-			        final int selectedIdx = colServeis.getSelectionModel().getSelectedIndex();
+			        int selectedIdx = colServeis.getSelectionModel().getSelectedIndex();
 			        if (selectedIdx != -1) {
-			        	//esto es solo para mostrar
-			          String itemToRemove = colServeis.getSelectionModel().getSelectedItem();
-
-			          final int newSelectedIdx =
+			           int newSelectedIdx =
 			            (selectedIdx == colServeis.getItems().size() - 1)
 			               ? selectedIdx - 1
 			               : selectedIdx;
 
-
-
 			          serveisDao.deleteServei(this.listServeis.get(selectedIdx).getCodi());
 
 			          colServeis.getItems().remove(selectedIdx);
-			          System.out.println(itemToRemove);
-			          //creo que hay que eliminar este.. o nu...
 			          colServeis.getSelectionModel().select(newSelectedIdx);
 			        }
 
-
-
 			} else {
-			    // ... user chose CANCEL or closed the dialog
 				alert.close();
 			}
 
 
 		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 		}
 
 	}
@@ -145,39 +124,28 @@ public class ServeisController implements Initializable{
 	public void clickModificar(ActionEvent event){
 
 		try {
-			final int selectedIdx = colServeis.getSelectionModel().getSelectedIndex();
+			int selectedIdx = colServeis.getSelectionModel().getSelectedIndex();
 			/**
 			 * Cojemos el servicio para mostrar la información en la subfinestra
 			 */
-			this.setServeiAModificar(this.listServeis.get(selectedIdx));
+			setServeiAModificar(this.listServeis.get(selectedIdx));
 
 			showAfegirServei("modificar");
 
 			Serveis updateServei = new Serveis(Integer.parseInt(controladorAfegir.getCode()), controladorAfegir.getNomServei());
 
-			//para updatear no podemos modificar el code
-			serveisDao.updateServei(updateServei);
+			this.serveisDao.updateServei(updateServei);
 
-			listServeis.remove(selectedIdx);
-			listServeis.add(selectedIdx, updateServei);
+			this.listServeis.remove(selectedIdx);
+			this.listServeis.add(selectedIdx, updateServei);
 
-			items.remove(selectedIdx);
-			items.add(selectedIdx, updateServei.getDescripcio());
+			this.items.remove(selectedIdx);
+			this.items.add(selectedIdx, updateServei.getDescripcio());
 
-			colServeis.setItems(items);
+			this.colServeis.setItems(items);
 
 		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 		}
 
 	}
@@ -197,39 +165,27 @@ public class ServeisController implements Initializable{
 
 
 		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ControlErrores.mostrarWarning("Error en el format de camp", "Es necesita numeros en el code");
 		}
 
 	}
 
 
 
-	private void showAfegirServei(String funcionalitat) throws IOException, HibernateException, NumberFormatException, SQLException{
+	private void showAfegirServei(String funcionalitat){
 		Stage window = new Stage();
 		FXMLLoader carregador = new FXMLLoader(getClass().getResource("VistaSubfinestraAfegirServei.fxml"));
+		BorderPane root = new BorderPane();
+		try {
+			root = carregador.load();
+		} catch (IOException e) {
+			ControlErrores.mostrarError("Error de carga de pantalla", "Hi ha hagut algun error de connexio torna a intentar-ho");
+		}
 
-		//SubfinestraAfegirServeiController.setFuncionalitat(funcionalitat);
-
-		//Al hacer el load() hace el initialice
-		BorderPane root = carregador.load();
-
-		//recoje el controlador que esta asociado a la variable "carregador" en este caso es el controlador de la vista "VistaSubfinestraAfegirServei.fxml"
 		controladorAfegir = carregador.getController();
 		controladorAfegir.setFuncionalitatS(funcionalitat);
-
-
-		//ServeisDao serveisDao = DaoManager.getServeisDao();
-
 
 		if("afegir".equals(funcionalitat)){
 			window.setTitle("Afegir Servei");

@@ -1,7 +1,6 @@
 package application;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
@@ -115,12 +114,7 @@ public class DetallsPacientController implements Initializable{
 
 	public static void setPacient(Clients pacientP) {
 		pacient = pacientP;
-
-
-
 	}
-
-
 
 }
 

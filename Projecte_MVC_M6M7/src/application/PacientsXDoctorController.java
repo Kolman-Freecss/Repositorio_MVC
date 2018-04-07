@@ -30,8 +30,8 @@ public class PacientsXDoctorController implements Initializable{
 	@FXML private TextField txtTelefon;
 	@FXML private TextField txtCorreu;
 
-	ClientsDao clientDao = DaoManager.getClientsDao();
-	AssistenciesDao assistenciesDao = DaoManager.getAssistenciesDao();
+	private ClientsDao clientDao = DaoManager.getClientsDao();
+	private AssistenciesDao assistenciesDao = DaoManager.getAssistenciesDao();
 	private List<Clients> temporaryLlistaPacients = new LinkedList<Clients>();
 	private List<Assistencies> llistatAssistencies = new LinkedList<Assistencies>();
 	private String usuariDoctor;
@@ -63,8 +63,6 @@ public class PacientsXDoctorController implements Initializable{
 
 		for (Assistencies a : llistatAssistencies) {
 			if(a.getUsuaris().getIdUsuari().equals(usuariDoctor)){
-				//el llistat d'assistencies solo tiene el id por algun motivo
-				//por eso tengo que obtener el cliente apartir del id
 				Clients client;
 				try {
 					client = clientDao.getClient(a.getClients().getIdClient());
@@ -82,7 +80,7 @@ public class PacientsXDoctorController implements Initializable{
 				items = FXCollections.observableArrayList(llistaPacients);
 				colPacients.setItems(items);
 			} catch (HibernateException e) {
-				e.printStackTrace();
+				ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 			}
 
 		}

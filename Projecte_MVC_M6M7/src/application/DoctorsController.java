@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.ResourceBundle.Control;
 
 import org.hibernate.HibernateException;
 
@@ -212,7 +211,7 @@ public class DoctorsController implements Initializable{
 			/**
 			 * Cojemos el servicio para mostrar la información en la subfinestra
 			 */
-			this.setDoctorAModificar(this.llistaDoctors.get(selectedIdx));
+			setDoctorAModificar(llistaDoctors.get(selectedIdx));
 
 			showAfegirDoctor("modificar");
 
@@ -255,7 +254,6 @@ public class DoctorsController implements Initializable{
 			if (result.get() == ButtonType.OK){
 			        int selectedIdx = colDoctors.getSelectionModel().getSelectedIndex();
 			        if (selectedIdx != -1) {
-			          String itemToRemove = colDoctors.getSelectionModel().getSelectedItem();
 
 			          final int newSelectedIdx =
 			            (selectedIdx == colDoctors.getItems().size() - 1)
@@ -263,7 +261,7 @@ public class DoctorsController implements Initializable{
 			               : selectedIdx;
 
 
-			          Usuaris usuariAEliminar = this.llistaDoctors.get(selectedIdx);
+			          Usuaris usuariAEliminar = llistaDoctors.get(selectedIdx);
 
 			          try {
 						usuariDao.deleteUsuari(usuariAEliminar);
@@ -290,11 +288,11 @@ public class DoctorsController implements Initializable{
 	public void clickConsulta(ActionEvent event){
 
 		try {
-			final int selectedIdx = colDoctors.getSelectionModel().getSelectedIndex();
+			int selectedIdx = this.colDoctors.getSelectionModel().getSelectedIndex();
 			/**
 			 * Cojemos el doctor para mostrar la información en la subfinestra
 			 */
-			setDoctorAConsultar(this.llistaDoctors.get(selectedIdx));
+			setDoctorAConsultar(llistaDoctors.get(selectedIdx));
 			showAfegirDoctor("consultar");
 
 

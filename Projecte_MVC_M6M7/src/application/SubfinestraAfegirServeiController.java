@@ -23,8 +23,6 @@ public class SubfinestraAfegirServeiController implements Initializable{
 	private String code;
 	private String nomServei;
 
-	private static ServeisController controladorServeis;
-
 	@Override
 	public void initialize(URL url, ResourceBundle rsrcs) {
 
@@ -39,7 +37,6 @@ public class SubfinestraAfegirServeiController implements Initializable{
 	public void clickAfegir(ActionEvent event){
 
 		code = et1.getText();
-
 		nomServei = et2.getText();
 
 		Node source = (Node) event.getSource();
@@ -52,7 +49,9 @@ public class SubfinestraAfegirServeiController implements Initializable{
 	@FXML
 	public void clickVolver(ActionEvent event){
 
-
+		Node source = (Node) event.getSource();
+		Stage stage2 = (Stage) source.getScene().getWindow();
+		stage2.close();
 
 	}
 
@@ -69,6 +68,9 @@ public class SubfinestraAfegirServeiController implements Initializable{
 	public void setFuncionalitatS(String funcionalitatP) {
 		funcionalitat = funcionalitatP;
 
+		/**
+		 * Posem la data
+		 */
 		if("modificar".equals(funcionalitat)){
 			et1.setText(String.valueOf(ServeisController.getServeiAModificar().getCodi()));
 			et2.setText(ServeisController.getServeiAModificar().getDescripcio());

@@ -119,7 +119,7 @@ public class TotsPacientsController implements Initializable{
 
 			this.clientDao.addClient(newClient);
 
-			this.llistaPacients.add(newClient);
+			llistaPacients.add(newClient);
 			items.add(newClient.getNom());
 
 
@@ -133,11 +133,11 @@ public class TotsPacientsController implements Initializable{
 	public void clickModificar(ActionEvent event){
 
 		try {
-			final int selectedIdx = colPacients.getSelectionModel().getSelectedIndex();
+			int selectedIdx = colPacients.getSelectionModel().getSelectedIndex();
 			/**
 			 * Cojemos el servicio para mostrar la información en la subfinestra
 			 */
-			this.setPacientAModificar(this.llistaPacients.get(selectedIdx));
+			setPacientAModificar(llistaPacients.get(selectedIdx));
 
 			showAfegirPacient("modificar");
 
@@ -239,7 +239,7 @@ public class TotsPacientsController implements Initializable{
 
 
 
-			          clientDao.deleteClient(this.llistaPacients.get(selectedIdx).getIdClient());
+			          clientDao.deleteClient(llistaPacients.get(selectedIdx).getIdClient());
 
 			          colPacients.getItems().remove(selectedIdx);
 			          System.out.println(itemToRemove);

@@ -1,7 +1,6 @@
 package application;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -44,10 +43,9 @@ public class SubfinestraAfegirAsistenciaController implements Initializable{
 	private ServeisDao serveisDao = DaoManager.getServeisDao();
 	private ClientsDao clientsDao = DaoManager.getClientsDao();
 
-	private static AsistenciesController controladorAsistencies;
 	private List<String> llistaForPutData = new LinkedList<String>();
-	List<Serveis> llistaTemporallyServeis = new LinkedList<Serveis>();
-	List<Clients> llistaTemporallyClients = new LinkedList<Clients>();
+	private List<Serveis> llistaTemporallyServeis = new LinkedList<Serveis>();
+	private List<Clients> llistaTemporallyClients = new LinkedList<Clients>();
 	private ObservableList<String> observableListDataServeis;
 	private ObservableList<String> observableListDataClients;
 
@@ -83,13 +81,13 @@ public class SubfinestraAfegirAsistenciaController implements Initializable{
 
 	public void setFuncionalitatS() {
 
-
+		/**
+		 * Agafem els serveis
+		 */
 		try {
 			llistaTemporallyServeis = serveisDao.getServeis();
 		} catch (HibernateException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 		}
 
 		for (Serveis s : llistaTemporallyServeis) {
@@ -100,7 +98,9 @@ public class SubfinestraAfegirAsistenciaController implements Initializable{
 		llistaForPutData.clear();
 
 
-
+		/**
+		 * Agafem els clients
+		 */
 		try {
 			llistaTemporallyClients = clientsDao.getClients();
 		} catch (HibernateException e) {
@@ -114,13 +114,19 @@ public class SubfinestraAfegirAsistenciaController implements Initializable{
 		cbClients.setItems(observableListDataClients);
 		llistaForPutData.clear();
 
+		/**
+		 * Valor per defecte
+		 */
 		if(!cbServeis.getSelectionModel().isEmpty()){
 			cbServeis.getSelectionModel().select(0);
 		}else if(!cbClients.getSelectionModel().isEmpty()){
 			cbClients.getSelectionModel().select(0);
 		}
 
-		Date utilDate = new Date(); //fecha actual
+		/**
+		 * Fem el parse del Date
+		 */
+		Date utilDate = new Date();
 		long lnMilisegundos = utilDate.getTime();
 		Date sqlDate = new java.sql.Date(lnMilisegundos);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -133,19 +139,8 @@ public class SubfinestraAfegirAsistenciaController implements Initializable{
 		return servei;
 	}
 
-
-	public void setServei(Serveis servei) {
-		this.servei = servei;
-	}
-
-
 	public Clients getClient() {
 		return client;
-	}
-
-
-	public void setClient(Clients client) {
-		this.client = client;
 	}
 
 
@@ -154,20 +149,9 @@ public class SubfinestraAfegirAsistenciaController implements Initializable{
 	}
 
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
-
-
 	public String getObservacions() {
 		return observacions;
 	}
-
-
-	public void setObservacions(String observacions) {
-		this.observacions = observacions;
-	}
-
 
 }
 

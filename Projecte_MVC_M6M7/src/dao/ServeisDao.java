@@ -10,10 +10,10 @@ import pojos.Serveis;
 public interface ServeisDao {
 
 	//CRUD BASICS
-	public void addServei(Serveis servei) throws SQLException, HibernateException;
-	public Serveis getServei(int codi) throws SQLException, HibernateException;
-	public void updateServei(Serveis servei) throws SQLException, HibernateException;
-	public void deleteServei(int codi) throws SQLException, HibernateException;
-	public List<Serveis> getServeis() throws SQLException, HibernateException;
+	public void addServei(Serveis servei) throws HibernateException;
+	public Serveis getServei(int codi) throws HibernateException;
+	public void updateServei(Serveis servei) throws HibernateException;
+	public void deleteServei(int codi) throws HibernateException;
+	public List<Serveis> getServeis() throws HibernateException;
 
 }

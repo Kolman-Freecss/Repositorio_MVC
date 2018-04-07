@@ -24,23 +24,6 @@ public class MenuController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rsrcs) {
 
-		/*FXMLLoader carregador = new FXMLLoader(getClass().getResource("VistaLogin.fxml"));
-		try {
-			BorderPane root = carregador.load();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		loginController = carregador.getController();*/
-
-		/**
-		 * Si l'usuari no es un Administrador no tindrá accés
-		 */
-		/*if(!LoginController.getTipusPerfil().equals("ADMINISTRADOR")){
-			menuServeis.setVisible(false);;
-		}*/
-
 	}
 
 	public void carregarVista(Pane vista) {

@@ -22,7 +22,7 @@ public class ServeisDaoHibernate implements ServeisDao{
 	}
 
 	@Override
-	public void addServei(Serveis servei) throws SQLException, HibernateException {
+	public void addServei(Serveis servei) throws HibernateException {
 		Session session = factory.openSession();
 		Transaction tx = null;
 
@@ -40,7 +40,7 @@ public class ServeisDaoHibernate implements ServeisDao{
 	}
 
 	@Override
-	public Serveis getServei(int codi) throws SQLException, HibernateException {
+	public Serveis getServei(int codi) throws HibernateException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -65,7 +65,7 @@ public class ServeisDaoHibernate implements ServeisDao{
 	}
 
 	@Override
-	public void updateServei(Serveis servei) throws SQLException, HibernateException {
+	public void updateServei(Serveis servei) throws HibernateException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -92,7 +92,7 @@ public class ServeisDaoHibernate implements ServeisDao{
 	}
 
 	@Override
-	public void deleteServei(int codi) throws SQLException, HibernateException {
+	public void deleteServei(int codi) throws HibernateException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -117,7 +117,7 @@ public class ServeisDaoHibernate implements ServeisDao{
 	}
 
 	@Override
-	public List<Serveis> getServeis() throws SQLException, HibernateException {
+	public List<Serveis> getServeis() throws HibernateException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;

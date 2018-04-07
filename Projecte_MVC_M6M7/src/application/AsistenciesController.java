@@ -29,7 +29,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pojos.Assistencies;
-import pojos.Clients;
 import pojos.Usuaris;
 import resources.ControlErrores;
 
@@ -42,7 +41,6 @@ public class AsistenciesController implements Initializable{
 	@FXML private TableColumn<Assistencies, String> colComentari;
 	@FXML private Button btAfegir;
 
-	private static Clients pacient;
 	private AssistenciesDao asistDao = DaoManager.getAssistenciesDao();
 	private UsuarisDao usuariDao = DaoManager.getUsuarisDao();
 	private SubfinestraAfegirAsistenciaController controladorAfegir;
@@ -56,7 +54,7 @@ public class AsistenciesController implements Initializable{
 	private String usuariDoctor;
 	private Usuaris usuariLogat;
 
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 
 	@Override
@@ -113,8 +111,6 @@ public class AsistenciesController implements Initializable{
 		try {
 			showAfegirAsistencia();
 
-
-
 			Assistencies newAssistencia = new Assistencies(controladorAfegir.getServei(),
 					this.usuariLogat,
 					controladorAfegir.getClient(),
@@ -128,21 +124,21 @@ public class AsistenciesController implements Initializable{
 			refreshGrid();
 
 		} catch (HibernateException e) {
-			e.printStackTrace();
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 		}
 
 	}
 
-	private void showAfegirAsistencia() throws IOException, HibernateException, NumberFormatException, SQLException{
+	private void showAfegirAsistencia() {
 		Stage window = new Stage();
 		FXMLLoader carregador = new FXMLLoader(getClass().getResource("VistaSubfinestraAfegirAsistencia.fxml"));
-		BorderPane root = carregador.load();
+		BorderPane root = new BorderPane();
+
+		try {
+			root = carregador.load();
+		} catch (IOException e) {
+			ControlErrores.mostrarError("Error de carga de pantalla", "Hi ha hagut algun error de connexio torna a intentar-ho");
+		}
 
 		controladorAfegir = carregador.getController();
 		controladorAfegir.setFuncionalitatS();
@@ -152,9 +148,6 @@ public class AsistenciesController implements Initializable{
 		window.setResizable(false);
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.showAndWait();
-
-
-
 	}
 
 }

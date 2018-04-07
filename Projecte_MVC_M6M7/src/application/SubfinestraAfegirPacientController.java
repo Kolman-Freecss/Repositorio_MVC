@@ -51,7 +51,9 @@ public class SubfinestraAfegirPacientController implements Initializable{
 	@FXML
 	public void clickVolver(ActionEvent event){
 
-
+		Node source = (Node) event.getSource();
+		Stage stage2 = (Stage) source.getScene().getWindow();
+		stage2.close();
 
 	}
 
@@ -78,6 +80,9 @@ public class SubfinestraAfegirPacientController implements Initializable{
 	public void setFuncionalitatS(String funcionalitatP) {
 		funcionalitat = funcionalitatP;
 
+		/**
+		 * Posem la data
+		 */
 		if("modificar".equals(funcionalitat)){
 			this.nom = TotsPacientsController.getPacientAModificar().getNom();
 			this.cognoms = TotsPacientsController.getPacientAModificar().getCognoms();
