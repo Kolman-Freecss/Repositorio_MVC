@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
@@ -67,11 +68,11 @@ public class UsuarisDaoJDBC implements UsuarisDao{
 	public void updateUsuari(Usuaris usuari) throws SQLException{
 		c = GestionConnect.obtenirConnexio();
 
-		String sql = "UPDATE usuaris SET perfils=?, password=?, nom=?, cognoms=?, correu=?, numcolegiat=?, especialitat=? WHERE idUsuari = ?";
+		String sql = "UPDATE usuaris SET password=?,perfil=?, nom=?, cognoms=?, correu=?, numcolegiat=?, especialitat=? WHERE idUsuari = ?";
 		PreparedStatement sentenciaPrep = c.prepareStatement(sql);
 
-		sentenciaPrep.setInt(1, usuari.getPerfils().getCodi());
-		sentenciaPrep.setString(2, usuari.getPassword());
+		sentenciaPrep.setInt(2, usuari.getPerfils().getCodi());
+		sentenciaPrep.setString(1, usuari.getPassword());
 		sentenciaPrep.setString(3, usuari.getNom());
 		sentenciaPrep.setString(4, usuari.getCognoms());
 		sentenciaPrep.setString(5, usuari.getCorreu());
@@ -134,6 +135,24 @@ public class UsuarisDaoJDBC implements UsuarisDao{
 
 		return perfil;
 
+	}
+
+	@Override
+	public List<Perfils> getPerfils() throws SQLException{
+		c = GestionConnect.obtenirConnexio();
+
+		List<Perfils> vectorReturn = new LinkedList<Perfils>();
+
+		Statement sentencia = c.createStatement();
+
+		ResultSet resultat = sentencia.executeQuery("SELECT * "
+				+ "FROM perfils");
+
+		while(resultat.next()){
+			vectorReturn.add(this.getPerfil(resultat.getInt(1)));
+		}
+
+		return vectorReturn;
 	}
 
 	/**

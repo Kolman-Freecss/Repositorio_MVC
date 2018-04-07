@@ -9,8 +9,12 @@ public class ControlErrores {
 		mostrarAlert("Error", title, sms, AlertType.ERROR, "error-panel");
 	}
 
-	public static void mostrarInfo(String title, String sms) {
-		mostrarAlert("InformaciÃ³", title, sms, AlertType.INFORMATION, "info-panel");
+	public static void mostrarWarning(String title, String sms) {
+		mostrarAlert("Warning", title, sms, AlertType.WARNING, "info-panel");
+	}
+
+	public static void mostrarInformacio(String title, String sms) {
+		mostrarAlert("Informació", title, sms, AlertType.INFORMATION, "info-panel");
 	}
 
 	private static void mostrarAlert(String title, String header, String sms, AlertType tipus, String paneId) {

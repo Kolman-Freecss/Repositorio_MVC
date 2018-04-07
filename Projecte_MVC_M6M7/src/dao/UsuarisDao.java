@@ -17,6 +17,7 @@ public interface UsuarisDao {
 
 	//Metodes Perfils
 	public Perfils getPerfil(int codi) throws SQLException;
+	public List<Perfils> getPerfils() throws SQLException;
 	public List<String> getNomUsuaris() throws SQLException;
 
 }

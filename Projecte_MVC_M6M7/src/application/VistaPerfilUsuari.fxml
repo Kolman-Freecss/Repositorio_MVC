@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,56 +8,30 @@
 
 <BorderPane prefHeight="516.0" prefWidth="720.0" style="-fx-background-image: resources\Imagen_Background.jpg;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PerfilUsuariController">
    <center>
-      <SplitPane dividerPositions="0.49442896935933145" prefHeight="160.0" prefWidth="456.0" BorderPane.alignment="CENTER">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="45.0" prefWidth="352.0" text="Informació Personal" />
-                        <ListView prefHeight="443.0" prefWidth="352.0" />
-                     </children></VBox>
+                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="352.0" text="Informació Personal" />
+                  <Label text="Usuari" />
+                  <TextField fx:id="etUsuari" editable="false" prefHeight="25.0" prefWidth="393.0" />
+                  <Label text="Tipus de perfil" />
+                  <TextField fx:id="etPerfil" editable="false" prefHeight="25.0" prefWidth="393.0" />
+                  <Label text="Password" />
+                  <TextField fx:id="etPassword" editable="false" prefHeight="25.0" prefWidth="393.0" />
+                  <Label text="Nom" />
+                  <TextField fx:id="etNom" editable="false" prefHeight="25.0" prefWidth="393.0" />
+                  <Label text="Cognoms" />
+                  <TextField fx:id="etCognoms" editable="false" prefHeight="25.0" prefWidth="393.0" />
+                  <Label text="Correu" />
+                  <TextField fx:id="etCorreu" editable="false" prefHeight="25.0" prefWidth="393.0" />
+                  <Label text="Num colegiat" />
+                  <TextField fx:id="etNumColegiat" editable="false" prefHeight="25.0" prefWidth="393.0" />
+                  <Label text="Especialitat" />
+                  <TextField fx:id="etEspecialitat" editable="false" prefHeight="25.0" prefWidth="393.0" />
                </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <VBox layoutX="4.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="45.0" prefWidth="352.0" text="ELS TEUS PACIENTS" />
-                        <TabPane prefHeight="439.0" prefWidth="360.0" tabClosingPolicy="UNAVAILABLE">
-                          <tabs>
-                            <Tab text="Untitled Tab 1">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <TextField prefHeight="25.0" prefWidth="359.0" text="Filtre..." />
-                                          <ListView layoutY="26.0" prefHeight="380.0" prefWidth="355.0" />
-                                       </children>
-                                    </AnchorPane>
-                              </content>
-                            </Tab>
-                            <Tab text="Untitled Tab 2">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <TableView layoutX="3.0" layoutY="-1.0" prefHeight="412.0" prefWidth="354.0">
-                                            <columns>
-                                              <TableColumn prefWidth="75.0" text="Dia" />
-                                              <TableColumn prefWidth="91.0" text="Consulta" />
-                                                <TableColumn prefWidth="105.0" text="Comentari" />
-                                                <TableColumn prefWidth="82.0" text="Assistent" />
-                                            </columns>
-                                          </TableView>
-                                       </children>
-                                    </AnchorPane>
-                              </content>
-                            </Tab>
-                          </tabs>
-                        </TabPane>
-                     </children></VBox>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+            </VBox>
+         </children>
+      </AnchorPane>
    </center>
 </BorderPane>

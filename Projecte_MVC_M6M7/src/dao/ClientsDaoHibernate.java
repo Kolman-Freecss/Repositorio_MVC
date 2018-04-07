@@ -21,7 +21,7 @@ public class ClientsDaoHibernate implements ClientsDao{
 	}
 
 	@Override
-	public void addClient(Clients client) throws SQLException, HibernateException {
+	public void addClient(Clients client) throws HibernateException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -42,7 +42,7 @@ public class ClientsDaoHibernate implements ClientsDao{
 	}
 
 	@Override
-	public Clients getClient(int idClient) throws SQLException, HibernateException {
+	public Clients getClient(int idClient) throws HibernateException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -66,7 +66,7 @@ public class ClientsDaoHibernate implements ClientsDao{
 	}
 
 	@Override
-	public void updateClient(Clients client) throws SQLException, HibernateException {
+	public void updateClient(Clients client) throws HibernateException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -95,7 +95,7 @@ public class ClientsDaoHibernate implements ClientsDao{
 	}
 
 	@Override
-	public void deleteClient(int idClient) throws SQLException, HibernateException {
+	public void deleteClient(int idClient) throws HibernateException {
 		Session session = factory.openSession();
 		Transaction tx = null;
 
@@ -118,7 +118,7 @@ public class ClientsDaoHibernate implements ClientsDao{
 	}
 
 	@Override
-	public List<Clients> getClients() throws SQLException, HibernateException {
+	public List<Clients> getClients() throws HibernateException {
 		Session session = factory.openSession();
 		Transaction tx = null;
 		List<Clients> list = null;
@@ -140,7 +140,7 @@ public class ClientsDaoHibernate implements ClientsDao{
 	}
 
 	@Override
-	public List<String> getNomClients() throws SQLException, HibernateException {
+	public List<String> getNomClients() throws HibernateException {
 		Session session = factory.openSession();
 		Transaction tx = null;
 		List<String> listNoms = new LinkedList<String>();

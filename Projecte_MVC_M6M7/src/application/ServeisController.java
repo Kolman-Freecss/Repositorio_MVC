@@ -42,6 +42,9 @@ public class ServeisController implements Initializable{
 
 	//Llista de que te els noms del serveis
 	private ObservableList<String> items;
+	/**
+	 * Llista per recollir els objectes per eliminar, afegir...
+	 */
 	private List<Serveis> listServeis; //Guardamos toda la lista de objetos de la cual podemos recojer para eliminar, añadir...
 
 
@@ -155,11 +158,13 @@ public class ServeisController implements Initializable{
 			//para updatear no podemos modificar el code
 			serveisDao.updateServei(updateServei);
 
+			listServeis.remove(selectedIdx);
 			listServeis.add(selectedIdx, updateServei);
 
-			colServeis.getItems().remove(selectedIdx);
+			items.remove(selectedIdx);
 			items.add(selectedIdx, updateServei.getDescripcio());
 
+			colServeis.setItems(items);
 
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
@@ -213,14 +218,14 @@ public class ServeisController implements Initializable{
 		Stage window = new Stage();
 		FXMLLoader carregador = new FXMLLoader(getClass().getResource("VistaSubfinestraAfegirServei.fxml"));
 
-		SubfinestraAfegirServeiController.setFuncionalitat(funcionalitat);
+		//SubfinestraAfegirServeiController.setFuncionalitat(funcionalitat);
 
 		//Al hacer el load() hace el initialice
 		BorderPane root = carregador.load();
 
 		//recoje el controlador que esta asociado a la variable "carregador" en este caso es el controlador de la vista "VistaSubfinestraAfegirServei.fxml"
 		controladorAfegir = carregador.getController();
-
+		controladorAfegir.setFuncionalitatS(funcionalitat);
 
 
 		//ServeisDao serveisDao = DaoManager.getServeisDao();

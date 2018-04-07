@@ -16,7 +16,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="597.0" fitWidth="367.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="479.0" fitWidth="367.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../../../Wallpaper.png" />
                </image>

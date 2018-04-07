@@ -3,6 +3,7 @@ package application;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import resources.ControlErrores;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
@@ -20,7 +21,7 @@ public class Main extends Application {
 
 
 		} catch(Exception e) {
-			e.printStackTrace();
+			ControlErrores.mostrarError("No s'ha pogut iniciar l'aplicació", "Torna a intentar reiniciar l'aplicació");
 		}
 	}
 

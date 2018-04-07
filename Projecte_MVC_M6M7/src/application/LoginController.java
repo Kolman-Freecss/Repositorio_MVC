@@ -11,9 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -25,10 +23,8 @@ public class LoginController implements Initializable{
 	@FXML private TextField et1; //usuari
 	@FXML private TextField et2; //password
 
-	@FXML private Button btEntrar;
-	@FXML private Button btRegistrar;
-
 	private static String tipusPerfil;
+	private static String usuariDoctor;
 
 	/**
 	 * Initializes the controller class.
@@ -41,8 +37,7 @@ public class LoginController implements Initializable{
 	@FXML
 	public void clickEntrar(ActionEvent event){
 		try {
-			//BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaDoctors.fxml"));
-//FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaDoctors.fxml"));
+
 			if(this.checkLogin()){
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaAppMenu.fxml"));
 
@@ -50,63 +45,24 @@ public class LoginController implements Initializable{
 
 				MenuController controllerGeneral = fxmlLoader.getController();
 
-				//Creamos una nueva pantalla
 				Stage stage = new Stage();
-				//Le metemos el BorderPane que viene a ser el menu en la pantalla
 				stage.setScene(new Scene(root));
 
 				controllerGeneral.obrirDoctors();
 
 				stage.show();
 
-
-				/*Parent root1 = (Parent)fxmlLoader.load();
-
-				Stage stage = new Stage();
-
-				stage.setScene(new Scene(root1));
-
-				stage.show();*/
-
-				//((Node)(event.getSource())).getScene().getWindow().hide();
 				Node source = (Node) event.getSource();
 				Stage stage2 = (Stage) source.getScene().getWindow();
 				stage2.close();
 
 			}else{
-
-				ControlErrores.mostrarError(" el usuario no existe", "Usuario o contraseña incorrectos");
+				ControlErrores.mostrarError("El usuari no existeix", "Usuari o contrasenya incorrectes");
 
 			}
 
-			//this.carregarVista(vista);
 		} catch (Exception e) {
-			e.printStackTrace();
-			//MenuController.mostrarError("No s'ha pogut mostrar la gestiÃ³ d'Unitats Formatives", e.getMessage());
-		}
-	}
-
-	@FXML
-	public void clickRegistrar(ActionEvent event){
-
-		try {
-			//BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaDoctors.fxml"));
-
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaRegister.fxml"));
-			Parent root1 = (Parent)fxmlLoader.load();
-
-			Stage stage = new Stage();
-
-			stage.setScene(new Scene(root1));
-
-			stage.show();
-
-			((Node)(event.getSource())).getScene().getWindow().hide();
-
-			//this.carregarVista(vista);
-		} catch (Exception e) {
-			e.printStackTrace();
-			//MenuController.mostrarError("No s'ha pogut mostrar la gestiÃ³ d'Unitats Formatives", e.getMessage());
+			ControlErrores.mostrarError("No s'ha pogut mostrar l'aplicació", e.getMessage());
 		}
 	}
 
@@ -115,27 +71,24 @@ public class LoginController implements Initializable{
 	 * Checkea si el usuari existeix y quin tipus de perfil es
 	 * @return Si existeix = true / Si no existeix = false
 	 */
-	private boolean checkLogin(){
+	private boolean checkLogin() throws SQLException{
 
 		UsuarisDao usuariJDBC = DaoManager.getUsuarisDao();
 		Usuaris usuari = null;
 
-		try {
-
-			usuari = usuariJDBC.getUsuari(et1.getText());
-
-			tipusPerfil = usuari.getPerfils().getDescripcio();
-
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		/**
+		 * Recollim el usuari que es va a logear
+		 */
+		usuari = usuariJDBC.getUsuari(et1.getText());
 
 		if(usuari == null){
 			return false;
 		}else{
 			if(et2.getText().equals(usuari.getPassword())){
+				tipusPerfil = usuari.getPerfils().getDescripcio();
+				usuariDoctor = usuari.getIdUsuari();
 				return true;
+
 			}else{
 				return false;
 			}
@@ -144,5 +97,9 @@ public class LoginController implements Initializable{
 
 	public static String getTipusPerfil() {
 		return tipusPerfil;
+	}
+
+	public static String getUsuariDoctor() {
+		return usuariDoctor;
 	}
 }

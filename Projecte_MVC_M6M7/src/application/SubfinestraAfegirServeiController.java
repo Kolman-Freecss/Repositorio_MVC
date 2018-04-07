@@ -15,8 +15,8 @@ public class SubfinestraAfegirServeiController implements Initializable{
 
 	@FXML private Button etAfegir;
 	@FXML private Button etVolver;
-	@FXML private static TextField et1;
-	@FXML private static TextField et2;
+	@FXML private TextField et1;
+	@FXML private TextField et2;
 
 	private static String funcionalitat;
 
@@ -66,8 +66,7 @@ public class SubfinestraAfegirServeiController implements Initializable{
 		return nomServei;
 	}
 
-
-	public static void setFuncionalitat(String funcionalitatP) {
+	public void setFuncionalitatS(String funcionalitatP) {
 		funcionalitat = funcionalitatP;
 
 		if("modificar".equals(funcionalitat)){

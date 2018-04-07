@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -16,75 +17,86 @@
 
 <BorderPane prefHeight="516.0" prefWidth="725.0" style="-fx-background-image: resources\Imagen_Background.jpg;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DoctorsController">
    <center>
-      <SplitPane dividerPositions="0.49442896935933145" prefHeight="160.0" prefWidth="456.0" BorderPane.alignment="CENTER">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <ImageView fitHeight="516.0" fitWidth="693.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../Wallpaper.png" />
-                     </image>
-                  </ImageView>
-                  <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <SplitPane dividerPositions="0.49442896935933145" prefHeight="516.0" prefWidth="725.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="45.0" prefWidth="352.0" text="DOCTORS">
-                           <font>
-                              <Font name="Copperplate Gothic Light" size="23.0" />
-                           </font>
-                           <textFill>
-                              <RadialGradient centerX="0.5222222222222223" centerY="0.5" focusDistance="-0.09302325581395343" radius="0.5">
-                                 <stops>
-                                    <Stop color="RED" />
-                                    <Stop color="#5000ff" offset="1.0" />
-                                 </stops>
-                              </RadialGradient>
-                           </textFill></Label>
-                        <TextField promptText="Filtre...">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="30.0" right="30.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <ListView fx:id="colDoctors" prefHeight="406.0" prefWidth="289.0">
-                           <VBox.margin>
-                              <Insets left="30.0" right="30.0" />
-                           </VBox.margin></ListView>
-                     </children></VBox>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <ImageView fitHeight="516.0" fitWidth="693.0" layoutX="-96.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../Wallpaper.png" />
-                     </image>
-                  </ImageView>
-                  <VBox layoutX="4.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ImageView fitHeight="516.0" fitWidth="725.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../Clinica-Odontologica.jpg" />
+                           </image>
+                        </ImageView>
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="45.0" prefWidth="352.0" text="DOCTORS">
+                                 <font>
+                                    <Font name="Copperplate Gothic Light" size="23.0" />
+                                 </font>
+                                 <textFill>
+                                    <RadialGradient centerX="0.5222222222222223" centerY="0.5" focusDistance="-0.09302325581395343" radius="0.5">
+                                       <stops>
+                                          <Stop color="RED" />
+                                          <Stop color="BLACK" offset="1.0" />
+                                       </stops>
+                                    </RadialGradient>
+                                 </textFill>
+                              </Label>
+                              <ListView fx:id="colDoctors" prefHeight="390.0" prefWidth="294.0">
+                                 <VBox.margin>
+                                    <Insets left="30.0" right="30.0" />
+                                 </VBox.margin>
+                              </ListView>
+                              <HBox prefHeight="47.0" prefWidth="354.0">
+                                 <children>
+                                    <Button fx:id="btConsulta" mnemonicParsing="false" onAction="#clickConsulta" prefHeight="45.0" prefWidth="143.0" text="Informació Personal" />
+                                    <Button fx:id="btAfegir" mnemonicParsing="false" onAction="#clickAfegir" prefHeight="52.0" prefWidth="76.0" text="Afegir" />
+                                    <Button fx:id="btEliminar" mnemonicParsing="false" onAction="#clickEliminar" prefHeight="45.0" prefWidth="97.0" text="Eliminar" />
+                                    <Button fx:id="btModificar" mnemonicParsing="false" onAction="#clickModificar" prefHeight="45.0" prefWidth="97.0" text="Modificar" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="45.0" prefWidth="352.0" text="PACIENTS DEL DOCTOR">
-                           <font>
-                              <Font name="Copperplate Gothic Light" size="23.0" />
-                           </font>
-                           <textFill>
-                              <RadialGradient centerX="0.5222222222222223" centerY="0.5" focusDistance="-0.09302325581395343" radius="0.5">
-                                 <stops>
-                                    <Stop color="RED" />
-                                    <Stop color="#5000ff" offset="1.0" />
-                                 </stops>
-                              </RadialGradient>
-                           </textFill></Label>
-                        <TextField promptText="Filtre...">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="30.0" right="30.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <ListView fx:id="colPacients" prefHeight="406.0" prefWidth="352.0">
-                           <VBox.margin>
-                              <Insets left="30.0" right="30.0" />
-                           </VBox.margin></ListView>
-                     </children></VBox>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+                        <ImageView fitHeight="516.0" fitWidth="725.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../../Clinica-Odontologica.jpg" />
+                           </image>
+                        </ImageView>
+                        <VBox layoutX="4.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="45.0" prefWidth="352.0" text="ASISTENCIES DEL DOCTOR">
+                                 <font>
+                                    <Font name="Copperplate Gothic Light" size="23.0" />
+                                 </font>
+                                 <textFill>
+                                    <RadialGradient centerX="0.5222222222222223" centerY="0.5" focusDistance="-0.09302325581395343" radius="0.5">
+                                       <stops>
+                                          <Stop color="RED" />
+                                          <Stop color="BLACK" offset="1.0" />
+                                       </stops>
+                                    </RadialGradient>
+                                 </textFill>
+                              </Label>
+                              <ListView fx:id="colPacients" prefHeight="390.0" prefWidth="303.0">
+                                 <VBox.margin>
+                                    <Insets left="30.0" right="30.0" />
+                                 </VBox.margin>
+                              </ListView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </AnchorPane>
    </center>
 </BorderPane>

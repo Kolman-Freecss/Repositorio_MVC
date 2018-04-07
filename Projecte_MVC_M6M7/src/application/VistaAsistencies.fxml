@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="516.0" prefWidth="720.0" style="-fx-background-image: resources\Imagen_Background.jpg;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AsistenciesController">
+   <center>
+  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="516.0" prefWidth="720.0">
+               <children>
+                  <TableView fx:id="historialTable" prefHeight="397.0" prefWidth="720.0">
+                    <columns>
+                      <TableColumn fx:id="colDia" prefWidth="123.0" text="Dia" />
+                      <TableColumn fx:id="colConsulta" prefWidth="191.0" text="Consulta" />
+                        <TableColumn fx:id="colAssistent" prefWidth="182.0" text="Assistent" />
+                        <TableColumn fx:id="colComentari" prefWidth="223.0" text="Comentari" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="btAfegir" mnemonicParsing="false" onAction="#clickAfegir" text="Añadir" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

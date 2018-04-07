@@ -21,12 +21,6 @@ public class MenuController implements Initializable {
 
 	@FXML private Menu menuServeis;
 
-	/**
-	 * Per portar quin tipus de perfil te l'usuari logat
-	 */
-	private LoginController loginController;
-
-
 	@Override
 	public void initialize(URL url, ResourceBundle rsrcs) {
 
@@ -43,9 +37,9 @@ public class MenuController implements Initializable {
 		/**
 		 * Si l'usuari no es un Administrador no tindrá accés
 		 */
-		if(!LoginController.getTipusPerfil().equals("ADMINISTRADOR")){
+		/*if(!LoginController.getTipusPerfil().equals("ADMINISTRADOR")){
 			menuServeis.setVisible(false);;
-		}
+		}*/
 
 	}
 
@@ -54,18 +48,16 @@ public class MenuController implements Initializable {
 
 		if (checkSiVistaEstaCarregada(vista.getId())) return;
 
-		//Limpia lo del centro del BorderPane o algo asi creo hay que INVESTIGARLO MAS
+		/**
+		 * Limpia lo del centro del BorderPane
+		 */
 		this.paneVista.getChildren().clear();
-
-		//paneArrel.setPrefHeight(paneArrel.getHeight() - 80.0);
-
 		this.paneVista.getChildren().add(vista);
 
 		AnchorPane.setTopAnchor(vista,0.0);
 		AnchorPane.setBottomAnchor(vista,0.0);
 		AnchorPane.setLeftAnchor(vista, 0.0);
 		AnchorPane.setRightAnchor(vista, 0.0);
-		//this.paneVista.setVisible(true);
 	}
 
 	private boolean checkSiVistaEstaCarregada(String id) {
@@ -88,10 +80,6 @@ public class MenuController implements Initializable {
 	public void obrirDoctors() {
 		try {
 			BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaDoctors.fxml"));
-
-			//txtF1 = (TextField) this.vistaInici.lookup("#txtF1"); opcion valida antes de cargar la vista
-
-
 			this.carregarVista(vista);
 
 
@@ -104,10 +92,18 @@ public class MenuController implements Initializable {
 	public void obrirTotsPacients() {
 		try {
 			BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaTotsPacients.fxml"));
+			this.carregarVista(vista);
 
-			//txtF1 = (TextField) this.vistaInici.lookup("#txtF1"); opcion valida antes de cargar la vista
 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
+	@FXML
+	public void obrirPacientsXDoctor() {
+		try {
+			BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaPacientsXDoctor.fxml"));
 			this.carregarVista(vista);
 
 
@@ -120,10 +116,6 @@ public class MenuController implements Initializable {
 	public void obrirAbout() {
 		try {
 			BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaAbout.fxml"));
-
-			//txtF1 = (TextField) this.vistaInici.lookup("#txtF1"); opcion valida antes de cargar la vista
-
-
 			this.carregarVista(vista);
 
 
@@ -136,10 +128,6 @@ public class MenuController implements Initializable {
 	public void obrirPerfilUsuari() {
 		try {
 			BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaPerfilUsuari.fxml"));
-
-			//txtF1 = (TextField) this.vistaInici.lookup("#txtF1"); opcion valida antes de cargar la vista
-
-
 			this.carregarVista(vista);
 
 
@@ -152,10 +140,18 @@ public class MenuController implements Initializable {
 	public void obrirServeis() {
 		try {
 			BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaServeis.fxml"));
+			this.carregarVista(vista);
 
-			//txtF1 = (TextField) this.vistaInici.lookup("#txtF1"); opcion valida antes de cargar la vista
 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
+	@FXML
+	public void obrirAsistencies() {
+		try {
+			BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaAsistencies.fxml"));
 			this.carregarVista(vista);
 
 
@@ -168,10 +164,6 @@ public class MenuController implements Initializable {
 	public void tancarSessio() {
 		try {
 			BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaLogin.fxml"));
-
-			//txtF1 = (TextField) this.vistaInici.lookup("#txtF1"); opcion valida antes de cargar la vista
-
-
 			this.carregarVista(vista);
 
 

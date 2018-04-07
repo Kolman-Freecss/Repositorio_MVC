@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class GestionConnect {
 
-	private static String url = "jdbc:mysql://192.168.1.49/bdclinica";
+	private static String url = "jdbc:mysql://192.168.1.109/bdclinica";
 	private static String user = "root";
 	private static String pwd = "root";
 	private static Connection connexio = null;

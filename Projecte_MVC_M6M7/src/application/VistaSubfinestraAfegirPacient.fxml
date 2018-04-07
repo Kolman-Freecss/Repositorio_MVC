@@ -8,23 +8,23 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RegisterController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SubfinestraAfegirPacientController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <VBox layoutX="156.0" layoutY="32.0" prefHeight="336.0" prefWidth="289.0">
                <children>
-                  <Label text="Username" />
-                  <TextField fx:id="et1" prefHeight="25.0" prefWidth="393.0" />
-                  <Label prefHeight="17.0" prefWidth="60.0" text="Cognoms" />
-                  <TextField fx:id="et2" prefHeight="25.0" prefWidth="393.0" />
+                  <Label text="Nom" />
+                  <TextField fx:id="tfNom" prefHeight="25.0" prefWidth="393.0" />
+                  <Label text="Cognoms" />
+                  <TextField fx:id="tfCognoms" prefHeight="25.0" prefWidth="393.0" />
+                  <Label text="Telefon" />
+                  <TextField fx:id="tfTelefon" prefHeight="25.0" prefWidth="393.0" />
                   <Label text="Correu" />
-                  <TextField fx:id="et3" prefHeight="25.0" prefWidth="393.0" />
-                  <Label text="Password" />
-                  <TextField fx:id="et4" prefHeight="25.0" prefWidth="393.0" />
+                  <TextField fx:id="tfCorreu" prefHeight="25.0" prefWidth="393.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btEntrar" mnemonicParsing="false" onAction="#clickConfirmar" text="Confirmar" />
+                        <Button fx:id="btAfegir" mnemonicParsing="false" onAction="#clickAfegir" text="Afegir" />
                         <Button fx:id="btVolver" mnemonicParsing="false" onAction="#clickVolver" text="Volver" />
                      </children>
                   </HBox>

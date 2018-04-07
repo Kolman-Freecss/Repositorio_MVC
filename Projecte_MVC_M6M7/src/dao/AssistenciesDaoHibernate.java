@@ -21,7 +21,7 @@ public class AssistenciesDaoHibernate implements AssistenciesDao{
 	}
 
 	@Override
-	public void addAssistencia(Assistencies assistencia) throws SQLException, HibernateException {
+	public void addAssistencia(Assistencies assistencia) throws HibernateException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -41,7 +41,7 @@ public class AssistenciesDaoHibernate implements AssistenciesDao{
 	}
 
 	@Override
-	public Assistencies getAssistencia(Integer idAssistencia) throws SQLException, HibernateException {
+	public Assistencies getAssistencia(Integer idAssistencia) throws HibernateException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -66,7 +66,7 @@ public class AssistenciesDaoHibernate implements AssistenciesDao{
 	}
 
 	@Override
-	public void updateAssistencia(Assistencies assistencia) throws SQLException, HibernateException {
+	public void updateAssistencia(Assistencies assistencia) throws HibernateException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -96,7 +96,7 @@ public class AssistenciesDaoHibernate implements AssistenciesDao{
 	}
 
 	@Override
-	public void deleteAssistencia(Integer idAssistencia) throws SQLException, HibernateException {
+	public void deleteAssistencia(Integer idAssistencia) throws HibernateException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -121,7 +121,7 @@ public class AssistenciesDaoHibernate implements AssistenciesDao{
 	}
 
 	@Override
-	public List<Assistencies> getAssistencies() throws SQLException, HibernateException {
+	public List<Assistencies> getAssistencies() throws HibernateException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;

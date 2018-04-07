@@ -21,10 +21,15 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Pacients">
             <items>
-              <MenuItem mnemonicParsing="false" text="Pacients" />
+              <MenuItem mnemonicParsing="false" onAction="#obrirPacientsXDoctor" text="Els teus pacients" />
                   <MenuItem mnemonicParsing="false" onAction="#obrirTotsPacients" text="Llista de tots els Pacients" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Asistencies">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#obrirAsistencies" text="Llista de totesl les Asistencies" />
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Perfil">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#obrirPerfilUsuari" text="Configuració" />
