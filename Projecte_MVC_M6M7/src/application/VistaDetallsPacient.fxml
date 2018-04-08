@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -19,9 +24,28 @@
    <center>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
+            <ImageView fitHeight="516.0" fitWidth="720.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../../Clinica-Odontologica.jpg" />
+               </image>
+            </ImageView>
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label prefHeight="54.0" prefWidth="720.0" text="Fulla Pacient" />
+                  <Label prefHeight="54.0" prefWidth="247.0" text="Fulla Pacient">
+                     <font>
+                        <Font name="Copperplate Gothic Light" size="23.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="BLACK" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                     <VBox.margin>
+                        <Insets left="250.0" />
+                     </VBox.margin></Label>
                   <TabPane prefHeight="434.0" prefWidth="720.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab text="Informació personal">
@@ -30,7 +54,7 @@
                                  <children>
                                     <VBox layoutX="4.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <GridPane prefHeight="469.0" prefWidth="360.0">
+                                          <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="406.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="183.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.0" minWidth="10.0" prefWidth="177.0" />
@@ -44,22 +68,22 @@
                                              <children>
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom:" wrappingWidth="137.13671875">
                                                    <font>
-                                                      <Font name="System Bold" size="20.0" />
+                                                      <Font name="System Bold" size="16.0" />
                                                    </font>
                                                 </Text>
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cognoms:" wrappingWidth="137.13671875" GridPane.rowIndex="1">
                                                    <font>
-                                                      <Font name="System Bold" size="20.0" />
+                                                      <Font name="System Bold" size="16.0" />
                                                    </font>
                                                 </Text>
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon:" wrappingWidth="137.13671875" GridPane.rowIndex="2">
                                                    <font>
-                                                      <Font name="System Bold" size="20.0" />
+                                                      <Font name="System Bold" size="16.0" />
                                                    </font>
                                                 </Text>
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Correu:" wrappingWidth="137.13671875" GridPane.rowIndex="3">
                                                    <font>
-                                                      <Font name="System Bold" size="20.0" />
+                                                      <Font name="System Bold" size="16.0" />
                                                    </font>
                                                 </Text>
                                                 <TextField fx:id="txtNom" GridPane.columnIndex="1" />
@@ -67,6 +91,9 @@
                                                 <TextField fx:id="txtTelefon" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                 <TextField fx:id="txtCorreu" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                              </children>
+                                             <VBox.margin>
+                                                <Insets left="25.0" top="25.0" />
+                                             </VBox.margin>
                                           </GridPane>
                                        </children>
                                     </VBox>
@@ -78,12 +105,12 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="historialTable" layoutX="66.0" layoutY="103.0" prefHeight="200.0" prefWidth="526.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="historialTable" layoutX="66.0" layoutY="103.0" prefHeight="200.0" prefWidth="526.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
                                       <columns>
                                         <TableColumn fx:id="colDia" prefWidth="123.0" text="Dia" />
-                                        <TableColumn fx:id="colConsulta" prefWidth="191.0" text="Consulta" />
-                                          <TableColumn fx:id="colAssistent" prefWidth="182.0" text="Assistent" />
-                                          <TableColumn fx:id="colComentari" prefWidth="223.0" text="Comentari" />
+                                        <TableColumn fx:id="colConsulta" prefWidth="176.0" text="Consulta" />
+                                          <TableColumn fx:id="colAssistent" prefWidth="156.0" text="Assistent" />
+                                          <TableColumn fx:id="colComentari" prefWidth="204.0" text="Comentari" />
                                       </columns>
                                     </TableView>
                                  </children>

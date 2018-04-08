@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import resources.ControlErrores;
 
 public class SubfinestraAfegirServeiController implements Initializable{
 
@@ -20,7 +21,7 @@ public class SubfinestraAfegirServeiController implements Initializable{
 
 	private static String funcionalitat;
 
-	private String code;
+	private int code;
 	private String nomServei;
 
 	@Override
@@ -36,12 +37,19 @@ public class SubfinestraAfegirServeiController implements Initializable{
 	@FXML
 	public void clickAfegir(ActionEvent event){
 
-		code = et1.getText();
-		nomServei = et2.getText();
+		try {
+			ServeisController.setConfirmacio(true);
 
-		Node source = (Node) event.getSource();
-		Stage stage2 = (Stage) source.getScene().getWindow();
-		stage2.close();
+			code = Integer.parseInt(et1.getText());
+			nomServei = et2.getText();
+
+			Node source = (Node) event.getSource();
+			Stage stage2 = (Stage) source.getScene().getWindow();
+			stage2.close();
+
+		} catch (NumberFormatException e) {
+			ControlErrores.mostrarWarning("Error en el format de camp", "Es necesita numeros en el camp code");
+		}
 
 
 	}
@@ -49,6 +57,8 @@ public class SubfinestraAfegirServeiController implements Initializable{
 	@FXML
 	public void clickVolver(ActionEvent event){
 
+		ServeisController.setConfirmacio(false);
+
 		Node source = (Node) event.getSource();
 		Stage stage2 = (Stage) source.getScene().getWindow();
 		stage2.close();
@@ -56,7 +66,7 @@ public class SubfinestraAfegirServeiController implements Initializable{
 	}
 
 
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
 
@@ -72,6 +82,7 @@ public class SubfinestraAfegirServeiController implements Initializable{
 		 * Posem la data
 		 */
 		if("modificar".equals(funcionalitat)){
+			et1.setEditable(false);
 			et1.setText(String.valueOf(ServeisController.getServeiAModificar().getCodi()));
 			et2.setText(ServeisController.getServeiAModificar().getDescripcio());
 		}

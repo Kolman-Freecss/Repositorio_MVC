@@ -1,9 +1,7 @@
 package dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -120,6 +118,7 @@ public class AssistenciesDaoHibernate implements AssistenciesDao{
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Assistencies> getAssistencies() throws HibernateException {
 

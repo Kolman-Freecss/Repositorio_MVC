@@ -93,7 +93,10 @@
                      </VBox.margin></ComboBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btAfegir" mnemonicParsing="false" onAction="#clickAfegir" prefHeight="25.0" prefWidth="63.0" text="Afegir" />
+                        <Button fx:id="btAfegir" mnemonicParsing="false" onAction="#clickAfegir" prefHeight="25.0" prefWidth="83.0" text="Confirmar">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin></Button>
                         <Separator opacity="0.0" prefHeight="9.0" prefWidth="258.0" />
                         <Button fx:id="btVolver" mnemonicParsing="false" onAction="#clickVolver" prefHeight="25.0" prefWidth="64.0" text="Volver" />
                      </children>

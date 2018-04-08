@@ -9,10 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import resources.ControlErrores;
 
 public class MenuController implements Initializable {
 
@@ -41,6 +45,8 @@ public class MenuController implements Initializable {
 		AnchorPane.setBottomAnchor(vista,0.0);
 		AnchorPane.setLeftAnchor(vista, 0.0);
 		AnchorPane.setRightAnchor(vista, 0.0);
+
+
 	}
 
 	private boolean checkSiVistaEstaCarregada(String id) {
@@ -67,7 +73,7 @@ public class MenuController implements Initializable {
 
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de pantalla", "Hi ha hagut algun error de connexio torna a intentar-ho");
 		}
 	}
 
@@ -79,7 +85,7 @@ public class MenuController implements Initializable {
 
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de pantalla", "Hi ha hagut algun error de connexio torna a intentar-ho");
 		}
 	}
 
@@ -91,7 +97,7 @@ public class MenuController implements Initializable {
 
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de pantalla", "Hi ha hagut algun error de connexio torna a intentar-ho");
 		}
 	}
 
@@ -103,7 +109,7 @@ public class MenuController implements Initializable {
 
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de pantalla", "Hi ha hagut algun error de connexio torna a intentar-ho");
 		}
 	}
 
@@ -115,7 +121,7 @@ public class MenuController implements Initializable {
 
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de pantalla", "Hi ha hagut algun error de connexio torna a intentar-ho");
 		}
 	}
 
@@ -126,8 +132,10 @@ public class MenuController implements Initializable {
 			this.carregarVista(vista);
 
 
+
+
 		} catch (IOException e) {
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de pantalla", "Hi ha hagut algun error de connexio torna a intentar-ho");
 		}
 	}
 
@@ -139,19 +147,29 @@ public class MenuController implements Initializable {
 
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de pantalla", "Hi ha hagut algun error de connexio torna a intentar-ho");
 		}
 	}
 
 	@FXML
 	public void tancarSessio() {
 		try {
-			BorderPane vista = (BorderPane)FXMLLoader.load(getClass().getResource("VistaLogin.fxml"));
-			this.carregarVista(vista);
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaLogin.fxml"));
+
+			BorderPane root = (BorderPane) fxmlLoader.load();
+
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.getIcons().add(new Image("/resources/logo.png"));
+
+
+			stage.show();
+
+			LoginController.getStage().close();
 
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			ControlErrores.mostrarError("Error de carga de pantalla", "Hi ha hagut algun error de connexio torna a intentar-ho");
 		}
 	}
 

@@ -1,7 +1,6 @@
 package application;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,7 +15,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import pojos.Assistencies;
 import pojos.Clients;
 import resources.ControlErrores;
@@ -24,11 +22,6 @@ import resources.ControlErrores;
 public class PacientsXDoctorController implements Initializable{
 
 	@FXML private ListView<String> colPacients;
-
-	@FXML private TextField txtNom;
-	@FXML private TextField txtCognoms;
-	@FXML private TextField txtTelefon;
-	@FXML private TextField txtCorreu;
 
 	private ClientsDao clientDao = DaoManager.getClientsDao();
 	private AssistenciesDao assistenciesDao = DaoManager.getAssistenciesDao();
@@ -39,50 +32,41 @@ public class PacientsXDoctorController implements Initializable{
 	@Override
 	public void initialize(URL url, ResourceBundle rsrcs) {
 
-		List<String> llistaPacients = new LinkedList<String>();
-
-		/**
-		 * Agafem el doctor que esta logat en aquest moment
-		 */
-		usuariDoctor = LoginController.getUsuariDoctor();
-
-		if(!LoginController.getTipusPerfil().equals("ADMINISTRADOR") && !LoginController.getTipusPerfil().equals("GESTIÓ")){
-			txtNom.disabledProperty();
-			txtCognoms.disabledProperty();
-			txtTelefon.disabledProperty();
-			txtCorreu.disabledProperty();
-		}
-
 		try {
+			List<String> llistaPacientsNom = new LinkedList<String>();
+			List<Integer> llistaPacients = new LinkedList<Integer>();
+
 			temporaryLlistaPacients.addAll(clientDao.getClients());
 			llistatAssistencies = this.assistenciesDao.getAssistencies();
 
-		} catch (HibernateException e1) {
-			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
-		}
 
-		for (Assistencies a : llistatAssistencies) {
-			if(a.getUsuaris().getIdUsuari().equals(usuariDoctor)){
-				Clients client;
-				try {
+			/**
+			 * Omplim la llista de pacients guardant el id del usuari perque no es repeteixi
+			 */
+			for (Assistencies a : llistatAssistencies) {
+				if(a.getUsuaris().getIdUsuari().equals(usuariDoctor)){
+					Clients client;
 					client = clientDao.getClient(a.getClients().getIdClient());
-					llistaPacients.add(client.getNom());
-				} catch (HibernateException e) {
-					ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
+					if(!llistaPacients.contains(client.getIdClient())){
+						llistaPacients.add(client.getIdClient());
+						llistaPacientsNom.add(client.getNom());
+					}
 				}
 			}
-		}
 
-		if(this.colPacients != null){
+			/**
+			 * Omplim la columna amb les dades anteriors
+			 */
+			if(this.colPacients != null){
 
-			ObservableList<String> items;
-			try {
-				items = FXCollections.observableArrayList(llistaPacients);
+				ObservableList<String> items;
+				items = FXCollections.observableArrayList(llistaPacientsNom);
 				colPacients.setItems(items);
-			} catch (HibernateException e) {
-				ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
+
 			}
 
+		} catch (HibernateException e1) {
+			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 		}
 
 	}

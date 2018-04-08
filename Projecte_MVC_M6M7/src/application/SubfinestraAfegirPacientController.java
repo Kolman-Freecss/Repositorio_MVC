@@ -36,6 +36,8 @@ public class SubfinestraAfegirPacientController implements Initializable{
 	@FXML
 	public void clickAfegir(ActionEvent event){
 
+		TotsPacientsController.setConfirmacio(true);
+
 		nom = tfNom.getText();
 		cognoms = tfCognoms.getText();
 		telefon = tfTelefon.getText();
@@ -50,6 +52,8 @@ public class SubfinestraAfegirPacientController implements Initializable{
 
 	@FXML
 	public void clickVolver(ActionEvent event){
+
+		TotsPacientsController.setConfirmacio(false);
 
 		Node source = (Node) event.getSource();
 		Stage stage2 = (Stage) source.getScene().getWindow();

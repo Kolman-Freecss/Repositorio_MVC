@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import pojos.Usuaris;
@@ -25,6 +26,11 @@ public class LoginController implements Initializable{
 
 	private static String tipusPerfil;
 	private static String usuariDoctor;
+
+	/**
+	 * Ventana de l'aplicació que la guardarem per tancarla després.
+	 */
+	private static Stage stage;
 
 	/**
 	 * Initializes the controller class.
@@ -45,8 +51,9 @@ public class LoginController implements Initializable{
 
 				MenuController controllerGeneral = fxmlLoader.getController();
 
-				Stage stage = new Stage();
+				stage = new Stage();
 				stage.setScene(new Scene(root));
+				stage.getIcons().add(new Image("/resources/logo.png"));
 
 				controllerGeneral.obrirDoctors();
 
@@ -102,4 +109,10 @@ public class LoginController implements Initializable{
 	public static String getUsuariDoctor() {
 		return usuariDoctor;
 	}
+
+	public static Stage getStage() {
+		return stage;
+	}
+
+
 }

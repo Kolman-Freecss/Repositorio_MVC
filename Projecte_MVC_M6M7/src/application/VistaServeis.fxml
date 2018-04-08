@@ -4,42 +4,64 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="479.0" prefWidth="355.0" style="-fx-background-image: resources\Imagen_Background.jpg;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ServeisController">
+<BorderPane prefHeight="532.0" prefWidth="781.0" style="-fx-background-image: resources\Imagen_Background.jpg;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ServeisController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="479.0" fitWidth="367.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ImageView fitHeight="532.0" fitWidth="781.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
-                  <Image url="@../../../../Wallpaper.png" />
+                  <Image url="@../../../../Clinica-Odontologica.jpg" />
                </image>
             </ImageView>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="479.0" prefWidth="367.0">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="532.0" prefWidth="781.0">
                <children>
-                  <HBox prefHeight="46.0" prefWidth="353.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="42.0" prefWidth="207.0" text="Serveis" />
-                     </children>
-                  </HBox>
-                  <TextField text="Filtre">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="207.0" text="SERVEIS">
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="RED" />
+                              <Stop color="RED" offset="0.007662835249042145" />
+                              <Stop color="BLACK" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                     <font>
+                        <Font name="Copperplate Gothic Light" size="23.0" />
+                     </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets left="280.0" top="5.0" />
                      </VBox.margin>
-                  </TextField>
-                  <ListView fx:id="colServeis" prefHeight="359.0" prefWidth="355.0" />
-                  <HBox prefHeight="44.0" prefWidth="355.0">
+                  </Label>
+                  <ListView fx:id="colServeis" prefHeight="373.0" prefWidth="559.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="100.0" right="100.0" top="10.0" />
+                     </VBox.margin>
+                  </ListView>
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="333.0">
                      <children>
-                        <Button fx:id="btAfegir" mnemonicParsing="false" onAction="#clickAfegir" prefHeight="42.0" prefWidth="74.0" text="Afegir" />
-                        <Button fx:id="btModificar" mnemonicParsing="false" onAction="#clickModificar" prefHeight="42.0" prefWidth="74.0" text="Modificar" />
-                        <Button fx:id="btEliminar" mnemonicParsing="false" onAction="#clickEliminar" prefHeight="42.0" prefWidth="74.0" text="Eliminar" />
+                        <Button fx:id="btAfegir" mnemonicParsing="false" onAction="#clickAfegir" prefHeight="50.0" prefWidth="80.0" />
+                        <Button fx:id="btModificar" mnemonicParsing="false" onAction="#clickModificar" prefHeight="50.0" prefWidth="80.0">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin></Button>
+                        <Button fx:id="btEliminar" mnemonicParsing="false" onAction="#clickEliminar" prefHeight="50.0" prefWidth="80.0">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin></Button>
                      </children>
+                     <VBox.margin>
+                        <Insets left="100.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>

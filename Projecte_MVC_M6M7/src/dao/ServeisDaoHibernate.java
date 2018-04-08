@@ -1,12 +1,12 @@
 package dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 
 import pojos.Serveis;
 
@@ -92,7 +92,7 @@ public class ServeisDaoHibernate implements ServeisDao{
 	}
 
 	@Override
-	public void deleteServei(int codi) throws HibernateException {
+	public void deleteServei(int codi) throws HibernateException, ConstraintViolationException {
 
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -107,6 +107,8 @@ public class ServeisDaoHibernate implements ServeisDao{
 			tx.commit();
 
 
+		} catch (ConstraintViolationException a){
+			throw a;
 		} catch (HibernateException e) {
 			if(tx!=null) tx.rollback();
 			throw e;
@@ -116,6 +118,7 @@ public class ServeisDaoHibernate implements ServeisDao{
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Serveis> getServeis() throws HibernateException {
 

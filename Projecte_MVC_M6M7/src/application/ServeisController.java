@@ -2,13 +2,13 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import org.hibernate.HibernateException;
+import org.hibernate.exception.ConstraintViolationException;
 
 import dao.DaoManager;
 import dao.ServeisDao;
@@ -24,6 +24,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -42,6 +44,11 @@ public class ServeisController implements Initializable{
 	private SubfinestraAfegirServeiController controladorAfegir;
 
 	/**
+	 * Serveix per saber si al final hem acabat per afegir o modificar
+	 */
+	private static boolean confirmacio = true;
+
+	/**
 	 * Llista amb els noms dels Serveis
 	 */
 	private ObservableList<String> items;
@@ -55,6 +62,10 @@ public class ServeisController implements Initializable{
 
 	@Override
 	public void initialize(URL url, ResourceBundle rsrcs) {
+
+		setIconImages();
+
+
 
 		/**
 		 * Si l'usuari no es un administrador no tindrá accés a l'inserció, modificació o eliminació d'un servei
@@ -75,6 +86,11 @@ public class ServeisController implements Initializable{
 				items = FXCollections.observableArrayList(listNomServeis);
 
 				colServeis.setItems(items);
+
+				if(colServeis.getItems().size() >= 0){
+					colServeis.getSelectionModel().select(0);
+				}
+
 			} catch (HibernateException e) {
 				ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 			}
@@ -84,7 +100,7 @@ public class ServeisController implements Initializable{
 	}
 
 	@FXML
-	public void clickEliminar(ActionEvent event) throws SQLException{
+	public void clickEliminar(ActionEvent event) throws HibernateException{
 
 		try {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -95,24 +111,32 @@ public class ServeisController implements Initializable{
 
 			if (result.get() == ButtonType.OK){
 
-			        int selectedIdx = colServeis.getSelectionModel().getSelectedIndex();
-			        if (selectedIdx != -1) {
-			           int newSelectedIdx =
-			            (selectedIdx == colServeis.getItems().size() - 1)
-			               ? selectedIdx - 1
-			               : selectedIdx;
+				int selectedIdx = colServeis.getSelectionModel().getSelectedIndex();
+				if (selectedIdx != -1) {
+					int newSelectedIdx =
+							(selectedIdx == colServeis.getItems().size() - 1)
+							? selectedIdx - 1
+									: selectedIdx;
 
-			          serveisDao.deleteServei(this.listServeis.get(selectedIdx).getCodi());
+					serveisDao.deleteServei(this.listServeis.get(selectedIdx).getCodi());
 
-			          colServeis.getItems().remove(selectedIdx);
-			          colServeis.getSelectionModel().select(newSelectedIdx);
-			        }
+					colServeis.getItems().remove(selectedIdx);
+					colServeis.getSelectionModel().select(newSelectedIdx);
+
+					Alert alertI = new Alert(AlertType.INFORMATION);
+					alertI.setTitle("Confirmació");
+					alertI.setHeaderText(null);
+					alertI.setContentText("S'ha completat la eliminació");
+					alertI.showAndWait();
+				}
 
 			} else {
 				alert.close();
 			}
 
 
+		} catch (ConstraintViolationException e) {
+			ControlErrores.mostrarError("Error al eliminar el servei", "Hi ha alguna asistencia relacionada amb aquest servei");
 		} catch (HibernateException e) {
 			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 		}
@@ -132,17 +156,30 @@ public class ServeisController implements Initializable{
 
 			showAfegirServei("modificar");
 
-			Serveis updateServei = new Serveis(Integer.parseInt(controladorAfegir.getCode()), controladorAfegir.getNomServei());
+			if(confirmacio){
 
-			this.serveisDao.updateServei(updateServei);
+				Serveis updateServei = new Serveis(controladorAfegir.getCode(), controladorAfegir.getNomServei());
 
-			this.listServeis.remove(selectedIdx);
-			this.listServeis.add(selectedIdx, updateServei);
+				this.serveisDao.updateServei(updateServei);
 
-			this.items.remove(selectedIdx);
-			this.items.add(selectedIdx, updateServei.getDescripcio());
+				this.listServeis.remove(selectedIdx);
+				this.listServeis.add(selectedIdx, updateServei);
 
-			this.colServeis.setItems(items);
+				/**
+				 * Refresh ListView
+				 */
+				this.items.remove(selectedIdx);
+				this.items.add(selectedIdx, updateServei.getDescripcio());
+				this.colServeis.setItems(items);
+				colServeis.getSelectionModel().select(selectedIdx);
+
+				Alert alertI = new Alert(AlertType.INFORMATION);
+				alertI.setTitle("Confirmació");
+				alertI.setHeaderText(null);
+				alertI.setContentText("S'ha modificat el servei correctament");
+				alertI.showAndWait();
+
+			}
 
 		} catch (HibernateException e) {
 			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
@@ -154,20 +191,27 @@ public class ServeisController implements Initializable{
 	public void clickAfegir(ActionEvent event){
 
 		try {
+
 			showAfegirServei("afegir");
 
-			Serveis newServei = new Serveis(Integer.parseInt(controladorAfegir.getCode()), controladorAfegir.getNomServei());
+			if(confirmacio){
+				Serveis newServei = new Serveis(controladorAfegir.getCode(), controladorAfegir.getNomServei());
 
-			serveisDao.addServei(newServei);
+				serveisDao.addServei(newServei);
 
-			listServeis.add(newServei);
-			items.add(newServei.getDescripcio());
+				listServeis.add(newServei);
+				items.add(newServei.getDescripcio());
+
+				Alert alertI = new Alert(AlertType.INFORMATION);
+				alertI.setTitle("Confirmació");
+				alertI.setHeaderText(null);
+				alertI.setContentText("S'ha afegit el servei correctament");
+				alertI.showAndWait();
+			}
 
 
 		} catch (HibernateException e) {
 			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
-		} catch (NumberFormatException e) {
-			ControlErrores.mostrarWarning("Error en el format de camp", "Es necesita numeros en el code");
 		}
 
 	}
@@ -209,9 +253,28 @@ public class ServeisController implements Initializable{
 		return serveiAModificar;
 	}
 
+	public void setIconImages(){
 
+		URL linkAfegir = getClass().getResource("/resources/añadir.png");
+		URL linkModificar = getClass().getResource("/resources/editar.png");
+		URL linkEliminar = getClass().getResource("/resources/eliminar.png");
 
+		Image imageAfegir = new Image(linkAfegir.toString(),24, 24, false, true);
+		Image imageModificar = new Image(linkModificar.toString(),24, 24, false, true);
+		Image imageEliminar= new Image(linkEliminar.toString(),24, 24, false, true);
 
+		btAfegir.setGraphic(new ImageView(imageAfegir));
+		btAfegir.setStyle("-fx-base: #b6e7c9;");
+		btModificar.setGraphic(new ImageView(imageModificar));
+		btModificar.setStyle("-fx-base: #b6e7c9;");
+		btEliminar.setGraphic(new ImageView(imageEliminar));
+		btEliminar.setStyle("-fx-base: #b6e7c9;");
+
+	}
+
+	public static void setConfirmacio(boolean confirmacioP) {
+		confirmacio = confirmacioP;
+	}
 
 }
 

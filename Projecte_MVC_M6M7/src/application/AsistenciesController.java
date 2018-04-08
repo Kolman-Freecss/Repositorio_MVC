@@ -22,9 +22,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,6 +41,7 @@ public class AsistenciesController implements Initializable{
 	@FXML private TableView<Assistencies> historialTable;
 	@FXML private TableColumn<Assistencies, String> colDia;
 	@FXML private TableColumn<Assistencies, String> colConsulta;
+	@FXML private TableColumn<Assistencies, String> colClient;
 	@FXML private TableColumn<Assistencies, String> colAssistent;
 	@FXML private TableColumn<Assistencies, String> colComentari;
 	@FXML private Button btAfegir;
@@ -47,6 +52,11 @@ public class AsistenciesController implements Initializable{
 
 	private List<Assistencies> llistaAssistencies = new LinkedList<Assistencies>();
 	private ObservableList<Assistencies> llistaActual;
+
+	/**
+	 * Serveix per saber si al final hem acabat per afegir o modificar
+	 */
+	private static boolean confirmacio = true;
 
 	/**
 	 * Variables per obtenir el usuari Logat
@@ -60,20 +70,25 @@ public class AsistenciesController implements Initializable{
 	@Override
 	public void initialize(URL url, ResourceBundle rsrcs) {
 
-		/**
-		 * Obtenim el usuari Logat
-		 */
-		usuariDoctor = LoginController.getUsuariDoctor();
 		try {
+
+			setIconImages();
+
+			/**
+			 * Obtenim el usuari Logat
+			 */
+			usuariDoctor = LoginController.getUsuariDoctor();
 			usuariLogat = usuariDao.getUsuari(usuariDoctor);
+
+			if(!"SANITARI".equals(usuariLogat.getPerfils().getDescripcio()) && !"ADMINISTRADOR".equals(usuariLogat.getPerfils().getDescripcio())){
+				btAfegir.setVisible(false);
+			}
+
+			refreshGrid();
+
 		} catch (SQLException e1) {
 			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 		}
-		if(!"SANITARI".equals(usuariLogat.getPerfils().getDescripcio())){
-			btAfegir.setVisible(false);
-		}
-
-		refreshGrid();
 
 	}
 
@@ -90,19 +105,23 @@ public class AsistenciesController implements Initializable{
 
 		colDia.setCellValueFactory(param ->
 		new SimpleStringProperty(sdf.format(param.getValue().getData()))
-		);
+				);
 
 		colConsulta.setCellValueFactory(param ->
 		new SimpleStringProperty(param.getValue().getServeis().getDescripcio())
-		);
+				);
+
+		colClient.setCellValueFactory(param ->
+		new SimpleStringProperty(param.getValue().getClients().getNom())
+				);
 
 		colAssistent.setCellValueFactory(param ->
 		new SimpleStringProperty(param.getValue().getUsuaris().getNom())
-		);
+				);
 
 		colComentari.setCellValueFactory(param ->
 		new SimpleStringProperty(param.getValue().getObservacions())
-		);
+				);
 	}
 
 	@FXML
@@ -111,17 +130,25 @@ public class AsistenciesController implements Initializable{
 		try {
 			showAfegirAsistencia();
 
-			Assistencies newAssistencia = new Assistencies(controladorAfegir.getServei(),
-					this.usuariLogat,
-					controladorAfegir.getClient(),
-					sdf.parse(controladorAfegir.getFecha()),
-					controladorAfegir.getObservacions());
+			if(confirmacio){
+				Assistencies newAssistencia = new Assistencies(controladorAfegir.getServei(),
+						this.usuariLogat,
+						controladorAfegir.getClient(),
+						sdf.parse(controladorAfegir.getFecha()),
+						controladorAfegir.getObservacions());
 
-			asistDao.addAssistencia(newAssistencia);
+				asistDao.addAssistencia(newAssistencia);
 
-			llistaAssistencies.add(newAssistencia);
+				llistaAssistencies.add(newAssistencia);
 
-			refreshGrid();
+				refreshGrid();
+
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Confirmació");
+				alert.setHeaderText(null);
+				alert.setContentText("S'ha afegit la nova asistencia correctament!");
+				alert.showAndWait();
+			}
 
 		} catch (HibernateException e) {
 			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
@@ -130,24 +157,40 @@ public class AsistenciesController implements Initializable{
 	}
 
 	private void showAfegirAsistencia() {
-		Stage window = new Stage();
-		FXMLLoader carregador = new FXMLLoader(getClass().getResource("VistaSubfinestraAfegirAsistencia.fxml"));
-		BorderPane root = new BorderPane();
-
 		try {
+
+			Stage window = new Stage();
+			FXMLLoader carregador = new FXMLLoader(getClass().getResource("VistaSubfinestraAfegirAsistencia.fxml"));
+			BorderPane root = new BorderPane();
 			root = carregador.load();
+
+			controladorAfegir = carregador.getController();
+			controladorAfegir.setFuncionalitatS();
+
+			window.setTitle("Consultar Doctor");
+			window.setScene(new Scene(root));
+			window.setResizable(false);
+			window.initModality(Modality.APPLICATION_MODAL);
+			window.showAndWait();
+
 		} catch (IOException e) {
 			ControlErrores.mostrarError("Error de carga de pantalla", "Hi ha hagut algun error de connexio torna a intentar-ho");
 		}
+	}
 
-		controladorAfegir = carregador.getController();
-		controladorAfegir.setFuncionalitatS();
+	public void setIconImages(){
 
-		window.setTitle("Consultar Doctor");
-		window.setScene(new Scene(root));
-		window.setResizable(false);
-		window.initModality(Modality.APPLICATION_MODAL);
-		window.showAndWait();
+		URL linkAfegir = getClass().getResource("/resources/añadir.png");
+
+		Image imageAfegir = new Image(linkAfegir.toString(),24, 24, false, true);
+
+		btAfegir.setGraphic(new ImageView(imageAfegir));
+		btAfegir.setStyle("-fx-base: #b6e7c9;");
+
+	}
+
+	public static void setConfirmacio(boolean confirmacioP) {
+		confirmacio = confirmacioP;
 	}
 
 }

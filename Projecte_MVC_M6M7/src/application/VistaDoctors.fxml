@@ -15,22 +15,22 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="516.0" prefWidth="725.0" style="-fx-background-image: resources\Imagen_Background.jpg;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DoctorsController">
+<BorderPane prefHeight="532.0" prefWidth="781.0" style="-fx-background-image: resources\Imagen_Background.jpg;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DoctorsController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <SplitPane dividerPositions="0.49442896935933145" prefHeight="516.0" prefWidth="725.0">
+            <SplitPane dividerPositions="0.5571245186136072" prefHeight="532.0" prefWidth="781.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <ImageView fitHeight="516.0" fitWidth="725.0" pickOnBounds="true">
+                        <ImageView fitHeight="532.0" fitWidth="432.0" pickOnBounds="true">
                            <image>
                               <Image url="@../../../../Clinica-Odontologica.jpg" />
                            </image>
                         </ImageView>
                         <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="45.0" prefWidth="352.0" text="DOCTORS">
+                              <Label alignment="CENTER" prefHeight="45.0" prefWidth="432.0" text="DOCTORS">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="23.0" />
                                  </font>
@@ -42,6 +42,9 @@
                                        </stops>
                                     </RadialGradient>
                                  </textFill>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
                               </Label>
                               <ListView fx:id="colDoctors" prefHeight="390.0" prefWidth="294.0">
                                  <VBox.margin>
@@ -50,10 +53,22 @@
                               </ListView>
                               <HBox prefHeight="47.0" prefWidth="354.0">
                                  <children>
-                                    <Button fx:id="btConsulta" mnemonicParsing="false" onAction="#clickConsulta" prefHeight="45.0" prefWidth="143.0" text="Informació Personal" />
-                                    <Button fx:id="btAfegir" mnemonicParsing="false" onAction="#clickAfegir" prefHeight="52.0" prefWidth="76.0" text="Afegir" />
-                                    <Button fx:id="btEliminar" mnemonicParsing="false" onAction="#clickEliminar" prefHeight="45.0" prefWidth="97.0" text="Eliminar" />
-                                    <Button fx:id="btModificar" mnemonicParsing="false" onAction="#clickModificar" prefHeight="45.0" prefWidth="97.0" text="Modificar" />
+                                    <Button fx:id="btConsulta" mnemonicParsing="false" onAction="#clickConsulta" prefHeight="50.0" prefWidth="80.0">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin></Button>
+                                    <Button fx:id="btAfegir" mnemonicParsing="false" onAction="#clickAfegir" prefHeight="50.0" prefWidth="80.0">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin></Button>
+                                    <Button fx:id="btEliminar" mnemonicParsing="false" onAction="#clickEliminar" prefHeight="50.0" prefWidth="80.0">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin></Button>
+                                    <Button fx:id="btModificar" mnemonicParsing="false" onAction="#clickModificar" prefHeight="50.0" prefWidth="80.0">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="15.0" />
+                                       </HBox.margin></Button>
                                  </children>
                                  <VBox.margin>
                                     <Insets top="20.0" />
@@ -65,14 +80,14 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <ImageView fitHeight="516.0" fitWidth="725.0" pickOnBounds="true">
+                        <ImageView fitHeight="532.0" fitWidth="725.0" pickOnBounds="true">
                            <image>
                               <Image url="@../../../../Clinica-Odontologica.jpg" />
                            </image>
                         </ImageView>
                         <VBox layoutX="4.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="352.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="45.0" prefWidth="352.0" text="ASISTENCIES DEL DOCTOR">
+                              <Label alignment="CENTER" prefHeight="45.0" prefWidth="354.0" text="ASISTENCIES DOCTOR">
                                  <font>
                                     <Font name="Copperplate Gothic Light" size="23.0" />
                                  </font>
@@ -84,6 +99,9 @@
                                        </stops>
                                     </RadialGradient>
                                  </textFill>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
                               </Label>
                               <ListView fx:id="colPacients" prefHeight="390.0" prefWidth="303.0">
                                  <VBox.margin>

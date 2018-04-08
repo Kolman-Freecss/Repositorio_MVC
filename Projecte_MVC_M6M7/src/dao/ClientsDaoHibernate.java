@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -117,6 +116,7 @@ public class ClientsDaoHibernate implements ClientsDao{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Clients> getClients() throws HibernateException {
 		Session session = factory.openSession();
@@ -139,6 +139,7 @@ public class ClientsDaoHibernate implements ClientsDao{
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<String> getNomClients() throws HibernateException {
 		Session session = factory.openSession();

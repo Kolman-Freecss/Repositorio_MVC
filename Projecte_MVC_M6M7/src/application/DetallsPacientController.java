@@ -51,15 +51,16 @@ public class DetallsPacientController implements Initializable{
 	@Override
 	public void initialize(URL url, ResourceBundle rsrcs) {
 
-		txtNom.setText(pacient.getNom());
-		txtCognoms.setText(pacient.getCognoms());
-		txtTelefon.setText(pacient.getTelefon());
-		txtCorreu.setText(pacient.getCorreu());
-
-		/**
-		 * Obtenim les assistencies del pacient corresponent
-		 */
 		try {
+
+			txtNom.setText(pacient.getNom());
+			txtCognoms.setText(pacient.getCognoms());
+			txtTelefon.setText(pacient.getTelefon());
+			txtCorreu.setText(pacient.getCorreu());
+
+			/**
+			 * Obtenim les assistencies del pacient corresponent
+			 */
 			llistaAssistencies = asistDao.getAssistencies();
 			for (Assistencies a : llistaAssistencies) {
 				if(a.getClients().getIdClient() == pacient.getIdClient()){
@@ -67,29 +68,30 @@ public class DetallsPacientController implements Initializable{
 				}
 			}
 
+
+			ObservableList<Assistencies> llistaActual = FXCollections.observableList(this.llistaAssistenciesPacient);
+
+			this.historialTable.setItems(llistaActual);
+
+			colDia.setCellValueFactory(param ->
+			new SimpleStringProperty(sdf.format(param.getValue().getData()))
+					);
+
+			colConsulta.setCellValueFactory(param ->
+			new SimpleStringProperty(param.getValue().getServeis().getDescripcio())
+					);
+
+			colAssistent.setCellValueFactory(param ->
+			new SimpleStringProperty(param.getValue().getUsuaris().getNom())
+					);
+
+			colComentari.setCellValueFactory(param ->
+			new SimpleStringProperty(param.getValue().getObservacions())
+					);
+
 		} catch (HibernateException e) {
 			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 		}
-
-		ObservableList<Assistencies> llistaActual = FXCollections.observableList(this.llistaAssistenciesPacient);
-
-		this.historialTable.setItems(llistaActual);
-
-		colDia.setCellValueFactory(param ->
-		new SimpleStringProperty(sdf.format(param.getValue().getData()))
-		);
-
-		colConsulta.setCellValueFactory(param ->
-		new SimpleStringProperty(param.getValue().getServeis().getDescripcio())
-		);
-
-		colAssistent.setCellValueFactory(param ->
-		new SimpleStringProperty(param.getValue().getUsuaris().getNom())
-		);
-
-		colComentari.setCellValueFactory(param ->
-		new SimpleStringProperty(param.getValue().getObservacions())
-		);
 
 	}
 

@@ -24,8 +24,8 @@ import resources.ControlErrores;
 
 public class SubfinestraAfegirDoctorController implements Initializable{
 
-	@FXML private Button etAfegir;
-	@FXML private Button etVolver;
+	@FXML private Button btAfegir;
+	@FXML private Button btVolver;
 	@FXML private TextField etUsuari;
 	@FXML private PasswordField etPassword;
 	@FXML private TextField etNom;
@@ -62,40 +62,45 @@ public class SubfinestraAfegirDoctorController implements Initializable{
 	@FXML
 	public void clickAfegir(ActionEvent event){
 		int index = 0;
-
-		usuari = etUsuari.getText();
-		password = etPassword.getText();
-		String perfilPerCreacio = cbPerfils.getValue();
-		/**
-		 * Obtenim el perfil en base al nom escollit en el ComboBox
-		 */
-		while(!perfilPerCreacio.equals(perfilsTemporally.get(index).getDescripcio()) && index < perfilsTemporally.size()){
-			index++;
-		}
-
-		/**
-		 * Recollim la data per agafarla desde el DoctorsController
-		 */
-		perfil = perfilsTemporally.get(index);
-		nom = etNom.getText();
-		cognoms = etCognoms.getText();
-		correu = etCorreu.getText();
 		try{
+
+			DoctorsController.setConfirmacio(false);
+			PerfilUsuariController.setConfirmacio(false);
+
+			usuari = etUsuari.getText();
+			password = etPassword.getText();
+			String perfilPerCreacio = cbPerfils.getValue();
+			/**
+			 * Obtenim el perfil en base al nom escollit en el ComboBox
+			 */
+			while(!perfilPerCreacio.equals(perfilsTemporally.get(index).getDescripcio()) && index < perfilsTemporally.size()){
+				index++;
+			}
+
+			/**
+			 * Recollim la data per agafarla desde el DoctorsController
+			 */
+			perfil = perfilsTemporally.get(index);
+			nom = etNom.getText();
+			cognoms = etCognoms.getText();
+			correu = etCorreu.getText();
 			numColegiat = Integer.parseInt(etNumColegiat.getText());
+			especialitat = cbEspecialitat.getValue();
+
+			Node source = (Node) event.getSource();
+			Stage stage2 = (Stage) source.getScene().getWindow();
+			stage2.close();
 		}catch(NumberFormatException e){
 			ControlErrores.mostrarWarning("Error en el format de camp", "Es necesita numeros");
 		}
-		especialitat = cbEspecialitat.getValue();
-
-		Node source = (Node) event.getSource();
-		Stage stage2 = (Stage) source.getScene().getWindow();
-		stage2.close();
-
 
 	}
 
 	@FXML
 	public void clickVolver(ActionEvent event){
+
+		DoctorsController.setConfirmacio(false);
+		PerfilUsuariController.setConfirmacio(false);
 
 		Node source = (Node) event.getSource();
 		Stage stage2 = (Stage) source.getScene().getWindow();
@@ -159,6 +164,7 @@ public class SubfinestraAfegirDoctorController implements Initializable{
 			etCorreu.setEditable(false);
 			etNumColegiat.setEditable(false);
 			cbEspecialitat.setEditable(false);
+			btAfegir.setVisible(false);
 
 			etUsuari.setText(DoctorsController.getDoctorAConsultar().getIdUsuari());
 			etPassword.setText(DoctorsController.getDoctorAConsultar().getPassword());
@@ -168,6 +174,25 @@ public class SubfinestraAfegirDoctorController implements Initializable{
 			etCorreu.setText(DoctorsController.getDoctorAConsultar().getCorreu());
 			etNumColegiat.setText(String.valueOf(DoctorsController.getDoctorAConsultar().getNumcolegiat()));
 			cbEspecialitat.getSelectionModel().select(DoctorsController.getDoctorAConsultar().getEspecialitat());
+		}else if("perfil".equals(funcionalitat)){
+			etUsuari.setEditable(false);
+
+			usuari = PerfilUsuariController.getUsuariAdminAModificar().getIdUsuari();
+			password = PerfilUsuariController.getUsuariAdminAModificar().getPassword();
+			perfil = PerfilUsuariController.getUsuariAdminAModificar().getPerfils();
+			nom = PerfilUsuariController.getUsuariAdminAModificar().getNom();
+			cognoms = PerfilUsuariController.getUsuariAdminAModificar().getCognoms();
+			correu = PerfilUsuariController.getUsuariAdminAModificar().getCorreu();
+			numColegiat = PerfilUsuariController.getUsuariAdminAModificar().getNumcolegiat();
+			especialitat = PerfilUsuariController.getUsuariAdminAModificar().getEspecialitat();
+			etUsuari.setText(usuari);
+			etPassword.setText(password);
+			cbPerfils.getSelectionModel().select(perfil.getDescripcio());
+			etNom.setText(nom);
+			etCognoms.setText(cognoms);
+			etCorreu.setText(correu);
+			etNumColegiat.setText(String.valueOf(numColegiat));
+			cbEspecialitat.getSelectionModel().select(especialitat);
 		}
 	}
 

@@ -58,6 +58,8 @@ public class SubfinestraAfegirAsistenciaController implements Initializable{
 	@FXML
 	public void clickAfegir(ActionEvent event){
 
+		AsistenciesController.setConfirmacio(true);
+
 		servei = llistaTemporallyServeis.get(cbServeis.getSelectionModel().getSelectedIndex());
 		client = llistaTemporallyClients.get(cbServeis.getSelectionModel().getSelectedIndex());
 		fecha = etFecha.getText();
@@ -73,6 +75,8 @@ public class SubfinestraAfegirAsistenciaController implements Initializable{
 	@FXML
 	public void clickVolver(ActionEvent event){
 
+		AsistenciesController.setConfirmacio(false);
+
 		Node source = (Node) event.getSource();
 		Stage stage2 = (Stage) source.getScene().getWindow();
 		stage2.close();
@@ -86,51 +90,49 @@ public class SubfinestraAfegirAsistenciaController implements Initializable{
 		 */
 		try {
 			llistaTemporallyServeis = serveisDao.getServeis();
-		} catch (HibernateException e) {
-			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
-		}
-
-		for (Serveis s : llistaTemporallyServeis) {
-			llistaForPutData.add(s.getCodi() + " - " + s.getDescripcio());
-		}
-		observableListDataServeis = FXCollections.observableArrayList(llistaForPutData);
-		cbServeis.setItems(observableListDataServeis);
-		llistaForPutData.clear();
 
 
-		/**
-		 * Agafem els clients
-		 */
-		try {
+			for (Serveis s : llistaTemporallyServeis) {
+				llistaForPutData.add(s.getCodi() + " - " + s.getDescripcio());
+			}
+			observableListDataServeis = FXCollections.observableArrayList(llistaForPutData);
+			cbServeis.setItems(observableListDataServeis);
+			llistaForPutData.clear();
+
+
+			/**
+			 * Agafem els clients
+			 */
 			llistaTemporallyClients = clientsDao.getClients();
+
+			for (Clients c : llistaTemporallyClients) {
+				llistaForPutData.add(c.getNom());
+			}
+			observableListDataClients = FXCollections.observableArrayList(llistaForPutData);
+			cbClients.setItems(observableListDataClients);
+			llistaForPutData.clear();
+
+			/**
+			 * Valor per defecte
+			 */
+			if(!cbServeis.getSelectionModel().isEmpty()){
+				cbServeis.getSelectionModel().select(0);
+			}else if(!cbClients.getSelectionModel().isEmpty()){
+				cbClients.getSelectionModel().select(0);
+			}
+
+			/**
+			 * Fem el parse del Date
+			 */
+			Date utilDate = new Date();
+			long lnMilisegundos = utilDate.getTime();
+			Date sqlDate = new java.sql.Date(lnMilisegundos);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			this.etFecha.setText(sdf.format(sqlDate));
+
 		} catch (HibernateException e) {
 			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
 		}
-
-		for (Clients c : llistaTemporallyClients) {
-			llistaForPutData.add(c.getNom());
-		}
-		observableListDataClients = FXCollections.observableArrayList(llistaForPutData);
-		cbClients.setItems(observableListDataClients);
-		llistaForPutData.clear();
-
-		/**
-		 * Valor per defecte
-		 */
-		if(!cbServeis.getSelectionModel().isEmpty()){
-			cbServeis.getSelectionModel().select(0);
-		}else if(!cbClients.getSelectionModel().isEmpty()){
-			cbClients.getSelectionModel().select(0);
-		}
-
-		/**
-		 * Fem el parse del Date
-		 */
-		Date utilDate = new Date();
-		long lnMilisegundos = utilDate.getTime();
-		Date sqlDate = new java.sql.Date(lnMilisegundos);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		this.etFecha.setText(sdf.format(sqlDate));
 
 	}
 
