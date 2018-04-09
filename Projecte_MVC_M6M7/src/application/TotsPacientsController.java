@@ -54,7 +54,7 @@ public class TotsPacientsController implements Initializable{
 	/**
 	 * Serveix per saber si al final hem acabat per afegir o modificar
 	 */
-	private static boolean confirmacio = true;
+	private static boolean confirmacio = false;
 
 	/**
 	 * Llista per recollir els objectes per eliminar, afegir...

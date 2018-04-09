@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -23,6 +24,7 @@ public class LoginController implements Initializable{
 
 	@FXML private TextField et1; //usuari
 	@FXML private TextField et2; //password
+	@FXML private Button btEntrar;
 
 	private static String tipusPerfil;
 	private static String usuariDoctor;

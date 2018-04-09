@@ -46,7 +46,7 @@ public class PerfilUsuariController implements Initializable{
 	/**
 	 * Serveix per saber si al final hem acabat per afegir o modificar
 	 */
-	private static boolean confirmacio = true;
+	private static boolean confirmacio = false;
 
 	/**
 	 * Aquestes variables son per si el usuari Logat es un administrador

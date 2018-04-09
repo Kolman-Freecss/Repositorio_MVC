@@ -60,7 +60,7 @@ public class DoctorsController implements Initializable{
 	/**
 	 * Serveix per saber si al final hem acabat per afegir o modificar
 	 */
-	private static boolean confirmacio = true;
+	private static boolean confirmacio = false;
 
 	/**
 	 * Guardem els doctors que volem modificar o consultar per si volem utilitzar alguna d'aquestes funcionalitats
@@ -117,6 +117,7 @@ public class DoctorsController implements Initializable{
 				colDoctors.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 					@Override
 					public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+						itemsPacients.clear();
 						chargePacientXDoctor(llistatAssistencies);
 					}
 				});

@@ -5,15 +5,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #98D8EF;" BorderPane.alignment="CENTER">
          <children>
+            <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../resources/Imagen_Background.jpg" />
+               </image>
+            </ImageView>
             <VBox layoutX="156.0" layoutY="113.0" prefHeight="249.0" prefWidth="289.0">
                <children>
                   <TextField fx:id="et1" prefHeight="25.0" prefWidth="393.0" promptText="Username..." />
@@ -28,10 +37,18 @@
                   </Button>
                </children>
             </VBox>
-            <Label alignment="CENTER" layoutX="171.0" layoutY="38.0" prefHeight="17.0" prefWidth="260.0" text="Iniciar sessió" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="171.0" layoutY="38.0" prefHeight="17.0" prefWidth="260.0" text="Iniciar sessió">
                <font>
                   <Font size="29.0" />
                </font>
+               <textFill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop color="RED" />
+                        <Stop color="BLACK" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </textFill>
             </Label>
          </children>
       </AnchorPane>

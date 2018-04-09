@@ -42,9 +42,9 @@
                 <MenuItem mnemonicParsing="false" onAction="#obrirServeis" text="Llista Serveis" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Sobre">
+            <Menu mnemonicParsing="false" text="Ajuda">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#obrirAbout" text="Ajuda" />
+                <MenuItem mnemonicParsing="false" onAction="#obrirAbout" text="Informació" />
               </items>
             </Menu>
         </menus>

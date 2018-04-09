@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="532.0" fitWidth="781.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../../Clinica-Odontologica.jpg" />
+                  <Image url="@../resources/Clinica-Odontologica.jpg" />
                </image>
             </ImageView>
             <VBox layoutX="24.0" layoutY="61.0" prefHeight="399.0" prefWidth="673.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">

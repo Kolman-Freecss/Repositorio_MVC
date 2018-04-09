@@ -56,7 +56,7 @@ public class AsistenciesController implements Initializable{
 	/**
 	 * Serveix per saber si al final hem acabat per afegir o modificar
 	 */
-	private static boolean confirmacio = true;
+	private static boolean confirmacio = false;
 
 	/**
 	 * Variables per obtenir el usuari Logat

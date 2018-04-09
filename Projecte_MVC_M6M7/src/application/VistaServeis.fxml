@@ -20,7 +20,7 @@
          <children>
             <ImageView fitHeight="532.0" fitWidth="781.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
-                  <Image url="@../../../../Clinica-Odontologica.jpg" />
+                  <Image url="@../resources/Clinica-Odontologica.jpg" />
                </image>
             </ImageView>
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="532.0" prefWidth="781.0">

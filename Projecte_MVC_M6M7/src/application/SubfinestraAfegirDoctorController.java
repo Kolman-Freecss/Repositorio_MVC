@@ -64,8 +64,8 @@ public class SubfinestraAfegirDoctorController implements Initializable{
 		int index = 0;
 		try{
 
-			DoctorsController.setConfirmacio(false);
-			PerfilUsuariController.setConfirmacio(false);
+			DoctorsController.setConfirmacio(true);
+			PerfilUsuariController.setConfirmacio(true);
 
 			usuari = etUsuari.getText();
 			password = etPassword.getText();

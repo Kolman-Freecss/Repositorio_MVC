@@ -46,7 +46,7 @@ public class ServeisController implements Initializable{
 	/**
 	 * Serveix per saber si al final hem acabat per afegir o modificar
 	 */
-	private static boolean confirmacio = true;
+	private static boolean confirmacio = false;
 
 	/**
 	 * Llista amb els noms dels Serveis

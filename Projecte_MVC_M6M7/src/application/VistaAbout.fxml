@@ -16,7 +16,7 @@
          <children>
             <ImageView fitHeight="532.0" fitWidth="781.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../../Clinica-Odontologica.jpg" />
+                  <Image url="@../resources/Imagen_Background.jpg" />
                </image>
             </ImageView>
             <Label alignment="CENTER" prefHeight="82.0" prefWidth="781.0" text="Informació sobre l'aplicació">
@@ -32,7 +32,12 @@
                   </RadialGradient>
                </textFill>
             </Label>
-            <Text layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aquesta es una aplicació per la gestió d'una clinica odontologica.                                                       Creada per: Sergio Martínez Román" wrappingWidth="399.13671875">
+            <Text layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aquesta es una aplicació per la gestió d'una clinica odontologica.                                                       Creada per: Sergio Martínez Román" wrappingWidth="399.13671875" AnchorPane.leftAnchor="15.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contacte: Sergio@gmail.com" wrappingWidth="399.13671875">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>

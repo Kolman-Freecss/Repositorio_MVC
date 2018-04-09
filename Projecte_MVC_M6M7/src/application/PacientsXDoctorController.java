@@ -39,6 +39,12 @@ public class PacientsXDoctorController implements Initializable{
 			temporaryLlistaPacients.addAll(clientDao.getClients());
 			llistatAssistencies = this.assistenciesDao.getAssistencies();
 
+			/**
+			 * Agafem el usuari Logat
+			 */
+
+			this.usuariDoctor = LoginController.getUsuariDoctor();
+
 
 			/**
 			 * Omplim la llista de pacients guardant el id del usuari perque no es repeteixi
