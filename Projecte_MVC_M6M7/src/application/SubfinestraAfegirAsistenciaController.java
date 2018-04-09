@@ -61,7 +61,7 @@ public class SubfinestraAfegirAsistenciaController implements Initializable{
 		AsistenciesController.setConfirmacio(true);
 
 		servei = llistaTemporallyServeis.get(cbServeis.getSelectionModel().getSelectedIndex());
-		client = llistaTemporallyClients.get(cbServeis.getSelectionModel().getSelectedIndex());
+		client = llistaTemporallyClients.get(cbClients.getSelectionModel().getSelectedIndex());
 		fecha = etFecha.getText();
 		observacions = etObservacions.getText();
 
