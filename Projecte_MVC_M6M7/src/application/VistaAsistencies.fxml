@@ -36,6 +36,8 @@
                </children>
             </VBox>
             <Button fx:id="btAfegir" layoutX="20.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickAfegir" prefHeight="40.0" prefWidth="80.0" />
+            <Button fx:id="btModificar" layoutX="100.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickModificar" prefHeight="40.0" prefWidth="80.0" />
+            <Button fx:id="btEliminar" layoutX="180.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickEliminar" prefHeight="40.0" prefWidth="80.0" />
          </children>
       </AnchorPane>
    </center>

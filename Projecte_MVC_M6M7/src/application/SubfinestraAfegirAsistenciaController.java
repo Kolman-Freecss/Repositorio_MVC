@@ -83,7 +83,7 @@ public class SubfinestraAfegirAsistenciaController implements Initializable{
 
 	}
 
-	public void setFuncionalitatS() {
+	public void setFuncionalitatS(String funcionalitatP) {
 
 		/**
 		 * Agafem els serveis
@@ -129,6 +129,24 @@ public class SubfinestraAfegirAsistenciaController implements Initializable{
 			Date sqlDate = new java.sql.Date(lnMilisegundos);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			this.etFecha.setText(sdf.format(sqlDate));
+
+
+			/**
+			 * Omplim data
+			 */
+			if("modificar".equals(funcionalitatP)){
+
+				servei = AsistenciesController.getAssistenciaAModificar().getServeis();
+				client = AsistenciesController.getAssistenciaAModificar().getClients();
+				fecha= sdf.format((AsistenciesController.getAssistenciaAModificar().getData()));
+				observacions = AsistenciesController.getAssistenciaAModificar().getObservacions();
+
+				cbServeis.getSelectionModel().select(servei.getCodi() + " - " + servei.getDescripcio());
+				cbClients.getSelectionModel().select(client.getNom());
+				etFecha.setText(fecha);
+				etObservacions.setText(observacions);
+
+			}
 
 		} catch (HibernateException e) {
 			ControlErrores.mostrarError("Error de carga de dades", "Hi ha hagut algun al cargar les dades");
