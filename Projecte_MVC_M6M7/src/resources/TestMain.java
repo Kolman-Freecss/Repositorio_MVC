@@ -17,6 +17,7 @@ import pojos.Usuaris;
 
 public class TestMain {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws ParseException, SQLException {
 
 		ServeisDao serveiDao = DaoManager.getServeisDao();
